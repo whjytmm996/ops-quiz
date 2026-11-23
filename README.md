@@ -4,7 +4,9 @@
 
 ## 在线访问
 
-GitHub Pages: https://whjytmm996.github.io/ops-quiz/
+GitHub Pages 地址：https://whjytmm996.github.io/ops-quiz/
+
+发布源已准备为 `gh-pages` 分支 `/ (root)`。首次启用需仓库管理员在 `Settings → Pages` 选择一次 `Deploy from a branch`，之后每次推送到 `main` 自动同步。
 
 ## 本地使用
 
@@ -20,4 +22,4 @@ GitHub Pages: https://whjytmm996.github.io/ops-quiz/
 
 ## 说明
 
-GitHub Pages 由 `.github/workflows/deploy.yml` 自动构建；首次部署会把单文件应用导入仓库并发布。
+`.github/workflows/deploy.yml` 只负责把 v74 单文件导入并同步到 `gh-pages` 分支；页面由 GitHub Pages 从该分支发布。
