@@ -1,0 +1,58 @@
+name: Deploy v74 to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Restore v74 single-file app
+        run: |
+          set -euo pipefail
+          if [ ! -f index.html ]; then
+            curl -fL --retry 3 --retry-delay 2 -o index.html "https://aka.doubaocdn.com/s/6MFVGnzeXJ"
+          fi
+          echo "d3c51b7c6c59399739a59e02ddbaee053789001c3320d7bf7305d916fd6e23e8  index.html" | sha256sum -c -
+          mkdir -p _site
+          cp index.html _site/index.html
+          cp .nojekyll _site/.nojekyll
+
+      - name: Persist imported source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: import v74 single-file app"
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
