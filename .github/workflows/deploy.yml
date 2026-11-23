@@ -46,6 +46,18 @@ jobs:
             git push
           fi
 
+      - name: Publish gh-pages branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout --orphan gh-pages
+          git rm -rf --cached .
+          cp _site/index.html index.html
+          cp _site/.nojekyll .nojekyll
+          git add -f index.html .nojekyll
+          git commit -m "deploy: v74 pages"
+          git push --force origin gh-pages
+
       - uses: actions/configure-pages@v5
         with:
           enablement: true
