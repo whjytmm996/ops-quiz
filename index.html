@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#f4f5f7">
 <meta name="color-scheme" content="light dark">
-<title>网络运维刷题宝典 · 8 周主线 + 16 周扩展</title>
+<title>网络运维刷题宝典 · 训练版 | 8 周主线 + 16 周扩展</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23123a6b'/%3E%3Cpath d='M7 8l-4 4 4 4M17 8l4 4-4 4M13.5 5l-3 14' stroke='%23ffffff' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <style>
 /* ============ 基础变量与重置 ============ */
@@ -137,10 +137,10 @@ html{scrollbar-color:var(--wash-4) transparent;scrollbar-width:thin}
 }
 .tag.single{background:rgba(10,132,255,.10);color:var(--blue)}
 .tag.multi{background:rgba(105,65,198,.10);color:var(--purple)}
-.tag.judge{background:rgba(163,90,0,.09);color:var(--amber)}
-.tag.fill{background:rgba(28,124,70,.09);color:var(--green)}
+.tag.judge{background:transparent;color:var(--txt-2);border-color:var(--line)}
+.tag.fill{background:transparent;color:var(--txt-2);border-color:var(--line)}
 .tag.cmd{background:rgba(77,156,255,.09);color:var(--cyan)}
-.tag.lv1{background:rgba(28,124,70,.09);color:var(--green)}
+.tag.lv1{background:transparent;color:var(--txt-2);border-color:var(--line)}
 .tag.lv2{background:rgba(163,90,0,.09);color:var(--amber)}
 .tag.lv3{background:rgba(217,45,32,.08);color:var(--red)}
 
@@ -244,7 +244,7 @@ html{scrollbar-color:var(--wash-4) transparent;scrollbar-width:thin}
 .q-src a{color:var(--cyan);text-decoration:none}
 .q-src a:hover{text-decoration:underline}
 .explain-body b{color:var(--cyan)}
-.explain-ans{font-family:var(--mono);color:var(--amber);font-weight:700}
+.explain-ans{font-family:var(--mono);color:var(--green);font-weight:700}
 .why{margin-top:14px;padding:12px 14px;border:1px solid var(--wash-4);border-radius:10px;background:var(--bg-2)}
 .why.you{border-color:rgba(229,72,77,.38)}
 .why-t{font-weight:700;color:var(--red);font-size:13.5px;margin-bottom:7px}
@@ -260,7 +260,7 @@ html{scrollbar-color:var(--wash-4) transparent;scrollbar-width:thin}
 .why.more[open] summary:before{content:"▾ "}
 .quiz-foot{display:flex;gap:11px;margin-top:18px;flex-wrap:wrap}
 .quiz-foot .spacer{flex:1}
-.fav-btn.on{color:var(--amber);border-color:var(--amber)}
+.fav-btn.on{color:var(--blue);border-color:var(--blue)}
 /* 题号面板 */
 .qpanel{margin-top:16px}
 .qpanel-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:7px}
@@ -370,7 +370,7 @@ html{scrollbar-color:var(--wash-4) transparent;scrollbar-width:thin}
 .drill-in:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(10,110,209,.1)}
 .drill-res{font-size:12.4px;line-height:1.6;margin-top:8px;color:var(--txt-3)}
 .drill-res.ok{color:var(--green)}
-.drill-res.no{color:var(--amber)}
+.drill-res.no{color:var(--red)}
 .chk-row{display:flex;gap:8px;align-items:center;margin-top:10px;padding-top:9px;border-top:1px solid var(--line-soft)}
 .chk-q{flex:1;min-width:0;font-size:12.8px;line-height:1.55}
 .chk-row .btn{flex:0 0 auto}
@@ -416,7 +416,7 @@ html{scrollbar-color:var(--wash-4) transparent;scrollbar-width:thin}
 .lq-in:focus{outline:none;border-color:#58a6ff}
 .lq-exp{font-size:12.4px;line-height:1.65;margin:5px 0 0;color:var(--txt-3)}
 .lq-exp.ok{color:var(--green)}
-.lq-exp.no{color:var(--amber)}
+.lq-exp.no{color:var(--red)}
 .lq-cmds{font-size:12.2px;color:var(--txt-3);margin:2px 0 4px}
 .lq-cmds .ti-hbtn{margin-right:6px}
 .tri-kicker{font-size:11px;letter-spacing:.8px;color:var(--txt-3);margin-bottom:6px}
@@ -614,7 +614,7 @@ html{scrollbar-color:var(--wash-4) transparent;scrollbar-width:thin}
 .param-t{width:100%;table-layout:fixed;border-collapse:collapse;font-size:13.5px}
 .param-t th{text-align:left;color:var(--txt-3);font-weight:500;padding:8px 10px;border-bottom:1px solid var(--line)}
 .param-t td{padding:9px 10px;color:var(--txt-2);border-bottom:1px solid var(--line);vertical-align:top}
-.param-t td:first-child{color:var(--green);font-family:var(--mono)}
+.param-t td:first-child{color:var(--txt-2);font-family:var(--mono)}
 .note-box{border-radius:10px;padding:13px 15px;font-size:13.5px;line-height:1.75;margin-bottom:10px;color:var(--txt-2)}
 .lw-out{margin:10px 0 6px}
 .lw-out>b,.lw-read>b{display:block;font-size:11.6px;letter-spacing:.06em;color:var(--txt-3);font-weight:600;margin-bottom:5px}
@@ -631,7 +631,7 @@ html{scrollbar-color:var(--wash-4) transparent;scrollbar-width:thin}
 .lw-steps p{margin:0 0 7px;font-size:12.8px;line-height:1.75;color:var(--txt-2)}
 .lw-steps .lw-pre{background:#14171b;border:1px solid var(--line);border-radius:8px;padding:9px 11px;
   font-family:var(--mono);font-size:11.8px;line-height:1.6;white-space:pre-wrap;margin:6px 0 6px;color:#e8eaed}
-.lw-steps .watch{font-size:12.2px;color:var(--green);line-height:1.7}
+.lw-steps .watch{font-size:12.2px;color:var(--txt-2);line-height:1.7}
 .note-box.err{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3)}
 .note-box.scene{background:rgba(77,156,255,.05);border:1px solid rgba(77,156,255,.16)}
 .diagram-box{background:var(--canvas);border:1px solid var(--line);border-radius:14px;padding:14px;overflow-x:auto}
@@ -912,18 +912,32 @@ html{scrollbar-color:var(--wash-4) transparent;scrollbar-width:thin}
 .camp-task .d.done{color:var(--txt-3);text-decoration:line-through}
 .camp-weak{border:1px solid var(--line);background:var(--card);border-radius:var(--radius);padding:13px 16px;margin-bottom:14px;font-size:13px;color:var(--txt-2);line-height:1.7}
 .camp-weak b{color:var(--txt);font-weight:600}
-.camp-layout{display:grid;grid-template-columns:238px 1fr;gap:18px;align-items:start}
+.camp-layout{display:grid;grid-template-columns:260px 1fr;gap:18px;align-items:start}
 @media (max-width:900px){.camp-layout{grid-template-columns:1fr;gap:12px}}
+@media (max-width:900px){
+  #view-camp.on{display:flex;flex-direction:column}
+  .camp-layout{display:contents}
+  .camp-top{order:1}
+  .camp-nav{order:2;margin:0 0 12px}
+  .camp-today{order:3}
+  .camp-weak{order:4}
+  .camp-main{order:5}
+}
 .camp-nav{border:1px solid var(--line);background:var(--card);border-radius:var(--radius);padding:10px;position:sticky;top:76px;max-height:calc(100vh - 96px);overflow:auto}
-@media (max-width:900px){.camp-nav{position:static;max-height:none}}
+@media (max-width:900px){
+  .camp-nav{position:static;max-height:none;display:flex;gap:8px;padding:8px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+  .camp-nav .st{display:none}
+  .camp-nav button{flex:0 0 auto;width:auto!important;white-space:nowrap;padding:8px 10px;font-size:12.4px;scroll-snap-align:center}
+  .camp-nav button .w{display:none}
+}
 .camp-nav .st{font-size:11px;letter-spacing:.8px;color:var(--txt-3);padding:9px 8px 5px;border-top:1px solid var(--line-soft);margin-top:4px}
 .camp-nav .st:first-child{border-top:0;margin-top:0}
 .camp-nav button{display:flex;gap:8px;align-items:baseline;width:100%;text-align:left;border:0;background:none;padding:7px 8px;border-radius:8px;cursor:pointer;font-size:12.8px;color:var(--txt-2);line-height:1.45}
 .camp-nav button:hover{background:var(--card-2);color:var(--txt)}
-.camp-nav button.on{background:rgba(77,156,255,.14);color:#4d9cff;font-weight:600}
+.camp-nav button.on{background:rgba(0,113,227,.10);color:var(--blue);font-weight:600}
 .camp-nav button.lock{color:var(--txt-3);opacity:.72}
 .camp-nav .w{flex:none;width:26px;font-size:11.5px;color:var(--txt-3)}
-.camp-nav .on .w{color:#4d9cff}
+.camp-nav .on .w{color:var(--blue)}
 .camp-main{min-width:0}
 .camp-lesson{border:1px solid var(--line);background:var(--card);border-radius:var(--radius);padding:22px 24px}
 @media (max-width:640px){.camp-lesson{padding:16px 14px}}
@@ -1214,8 +1228,9 @@ h1,h2,h3,h4{letter-spacing:-.025em}
 .tag{font-size:11.5px;padding:3px 10px}
 .mini-tag{font-size:11px;padding:3px 9px}
 .tag.single,.tag.cmd{background:rgba(0,113,227,.07)!important;color:var(--acc)!important;border-color:rgba(0,113,227,.16)!important}
-.tag.fill{background:rgba(0,135,90,.07)!important;color:var(--green)!important;border-color:rgba(0,135,90,.16)!important}
-.tag.judge{background:rgba(178,80,0,.06)!important;color:var(--amber)!important;border-color:rgba(178,80,0,.14)!important}
+.tag.fill{background:var(--bg-2)!important;color:var(--txt-2)!important;border-color:var(--line)!important}
+.tag.judge{background:var(--bg-2)!important;color:var(--txt-2)!important;border-color:var(--line)!important}
+.tag.lv1{background:var(--bg-2)!important;color:var(--txt-2)!important;border-color:var(--line)!important}
 .tag.multi{background:rgba(94,92,230,.06)!important;color:var(--purple)!important;border-color:rgba(94,92,230,.14)!important}
 .done-dot{color:var(--green);font-size:12px}
 
@@ -1252,9 +1267,11 @@ h1,h2,h3,h4{letter-spacing:-.025em}
   .hero-kicker{text-align:left}
   .hero h1{font-size:32px;text-align:left;max-width:none;letter-spacing:-.04em;text-wrap:balance}
   .hero p,.hero-lead{font-size:16px;text-align:left;margin-left:0;margin-right:0;max-width:none}
-  .hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:18px 0;max-width:none;margin:28px 0 0;text-align:left}
-  .hstat{border-left:0!important;border-top:1px solid var(--line)!important;padding:14px 0 0!important}
-  .hstat:first-child,.hstat:nth-child(2){border-top:0!important;padding-top:0!important}
+  .hero-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;max-width:none;margin:22px 0 0;text-align:left}
+  .hstat{border-left:1px solid var(--line)!important;border-top:0!important;padding:0 8px!important}
+  .hstat:first-child{border-left:0!important}
+  .hstat b{font-size:26px!important}
+  .hstat span{font-size:10px!important;line-height:1.4;display:block}
   .hero-acts{justify-content:flex-start;gap:14px;margin-top:24px}
   .hero-minor{justify-content:flex-start}
   .hero-note{text-align:left;margin-top:26px}
@@ -1468,8 +1485,8 @@ html:not([data-theme="light"]) .lesson-card:hover,html:not([data-theme="light"])
   .hero{padding:44px 0 32px!important}
   .hero-kicker{margin-bottom:14px;padding:6px 10px;font-size:10px}
   .hero-stats{padding:14px 4px 12px!important;border-radius:20px!important}
-  .hstat{border-left:0!important;border-top:1px solid var(--line)!important;padding:14px 10px 0!important}
-  .hstat:first-child,.hstat:nth-child(2){border-top:0!important;padding-top:0!important}
+  .hstat{border-left:1px solid var(--line)!important;border-top:0!important;padding:0 6px!important}
+  .hstat:first-child{border-left:0!important}
   .home-entries{gap:14px;margin-top:22px}
   .he{min-height:0;padding:22px 20px 20px;border-radius:22px}
   .he-head{margin-bottom:16px}
@@ -1576,6 +1593,29 @@ html:not([data-theme="light"]) .case-cell{background:rgba(255,255,255,.045)}
 
 @media(min-width:1100px){#view-course .lesson-grid{grid-template-columns:repeat(3,minmax(0,1fr))}#view-course .hero p{max-width:820px}}
 #view-course .hero p{word-break:keep-all;overflow-wrap:break-word;text-wrap:balance}
+
+/* ===== v75 fixes ===== */
+.hero h1 .nowrap{white-space:nowrap}
+.brand-sub{font-style:normal;font-size:10px;font-weight:500;color:var(--txt-3);border:1px solid var(--line);border-radius:99px;padding:1px 6px;margin-left:2px;line-height:1.6;white-space:nowrap}
+.camp-h1-br{display:none}
+.w8-form{margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.w8-form .w8-ta{display:block;box-sizing:border-box;width:100%;min-height:42px;margin-top:4px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:var(--card-2);color:var(--txt);font:12.2px/1.55 var(--sans);outline:none;resize:vertical}
+.w8-form .w8-ta:focus{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(77,156,255,.12)}
+.w8-form .w8-in{display:block;box-sizing:border-box;width:100%;height:36px;margin-top:4px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:var(--card-2);color:var(--txt);font:12.2px/1.4 var(--sans);outline:none}
+.w8-form .w8-in:focus{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(77,156,255,.12)}
+@media (max-width:720px){
+  .camp-top{flex-direction:column;align-items:stretch}
+  .camp-top>div:first-child{width:100%}
+  .camp-top h1{font-size:26px;line-height:1.28;max-width:none}
+  .camp-h1-br{display:block}
+  .camp-stat{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%}
+  .camp-stat>div{min-width:0}
+  .lesson-wrap.lw-collapsed .lw-body{display:none}
+  .lw-expand.btn{display:flex;width:100%;justify-content:center;margin:14px 0 0;border:1px solid var(--line);background:var(--card-2)}
+}
+@media (min-width:721px){
+  .lw-expand{display:none}
+}
 </style>
 <script>try{if(localStorage.getItem('opsquiz_theme')!=='dark')document.documentElement.setAttribute('data-theme','light');}catch(e){document.documentElement.setAttribute('data-theme','light');}try{var tm=document.querySelector('meta[name="theme-color"]');if(tm)tm.setAttribute('content',document.documentElement.getAttribute('data-theme')==='light'?'#f4f5f7':'#050506');}catch(e){}</script>
 </head>
@@ -1589,7 +1629,7 @@ html:not([data-theme="light"]) .case-cell{background:rgba(255,255,255,.045)}
         <rect width="24" height="24" rx="6" fill="#0071e3"/>
         <path d="M7 8l-4 4 4 4M17 8l4 4-4 4M13.5 5l-3 14" stroke="#e8eaed" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
-      网络运维刷题宝典<small>OPS QUIZ</small>
+      网络运维刷题宝典<em class="brand-sub">训练版</em><small>OPS QUIZ</small>
     </div>
     <nav class="nav">
       <button data-route="camp">训练营</button>
@@ -2018,7 +2058,7 @@ grep ' 5[0-9][0-9] ' access.log | awk -F'[][]' '{print $2}' | cut -d: -f1-3 | so
 <section id="view-wiki" class="view">
   <div class="wiki-head">
     <div class="hero-kicker">KNOWLEDGE BASE · 18 篇</div>
-    <h1>知识体系 <span class="wh-sub">按系统分层学，不按周赶进度</span></h1>
+    <h1>知识体系 <span class="wh-sub">按系统分层</span>，不按周赶进度</h1>
     <p>先看上面的分层地图：L00–L03 四层从开机链路排到文件与权限，每层都写清「它负责什么、坏了什么症状、用哪条命令验证」。一层看懂再往下，不用赶；要抠细节，下面还有十二篇知识专题和六篇故障长文。</p>
   </div>
 
@@ -2831,7 +2871,7 @@ nc -zv 10.0.0.9 8080</div>
           </tbody>
         </table>
 
-        <div class="kp-h4">取证：五步把范围收窄</div>
+        <div class="kp-h4">取证：逐层把范围收窄</div>
         <div class="kp-cmd"><span class="c"># 1. 哪块盘、哪种满法（块与 inode 一起看）</span>
 df -h; df -i
 
@@ -3037,7 +3077,7 @@ semanage port -a -t http_port_t -p tcp 8088
 
         <div class="kp-h4">验证：以真实身份复测</div>
         <p>① <code class="i">sudo -u nginx test -r /var/www/html/index.php && echo ok</code>；② <code class="i">sudo -u nginx cat</code> 能读出内容；③ <code class="i">curl -I http://127.0.0.1/</code> 返回 200 而非 403；④ <code class="i">ausearch -m avc -ts recent</code> 不再新增同一条 denied。只做 ①② 不够——SELinux 的拒绝有时在 read 阶段才出现，必须走一次真实请求。</p>
-        <div class="kp-rel">配套练习：<a href="#/lab" onclick="goLab('lab-perm');return false">实验二 权限与 ACL</a> · <a href="#/lab" onclick="goLab('lab-sec');return false">实验二十 SELinux 与防火墙</a> · <a href="#/kp-perm" onclick="location.hash='#/wiki';return false">第 02 篇 权限与用户</a></div>
+        <div class="kp-rel">配套练习：<a href="#/lab" onclick="goLab('lab-perm');return false">W02 权限与 ACL</a> · <a href="#/lab" onclick="goLab('lab-sec');return false">W18 SELinux 与防火墙</a> · <a href="#/kp-perm" onclick="location.hash='#/wiki';return false">第 02 篇 权限与用户</a></div>
       </article>
       <article class="kp" id="fd-svc" data-k="proc">
         <div class="kp-h"><span>16</span><h3>服务起不来：状态、退出码、日志三处对账</h3></div>
@@ -3115,7 +3155,7 @@ systemctl is-enabled nginx
           </tbody>
         </table>
 
-<div class="kp-rel">配套练习：<a href="#/lab" onclick="goLab('lab-svc');return false">实验三 服务与日志</a> · <a href="#/triage" onclick="goTri('svc');return false">排障台「服务起不来」</a> · <a href="#/kp-svc" onclick="location.hash='#/wiki';return false">第 10 篇 服务与开机自启</a></div>
+<div class="kp-rel">配套练习：<a href="#/lab" onclick="goLab('lab-svc');return false">W03 服务与日志</a> · <a href="#/triage" onclick="goTri('svc');return false">排障台「服务起不来」</a> · <a href="#/kp-svc" onclick="location.hash='#/wiki';return false">第 10 篇 服务与开机自启</a></div>
       </article>
       <article class="kp" id="fd-dns" data-k="net">
         <div class="kp-h"><span>17</span><h3>DNS 解析失败：先问 getent，再问 dig</h3></div>
@@ -3267,22 +3307,22 @@ curl -o /dev/null -s -w "%{time_total}\n" http://127.0.0.1:8080/health
 <!-- ===== 视图：首页 ===== -->
 <section class="view on" id="view-home">
   <div class="hero">
-    <div class="hero-kicker">OPS TRAINING · 24 周</div>
-    <h1>把故障判断，<br><span>练成可交付的能力。</span></h1>
-    <p class="hero-lead">8 周主线：专题课、实验、故障挑战、验收。<br>24 周全程：20 题笔试 + 盲排实战。<span class="lead-tail">不承诺头衔，只承诺能按五步工单独立值班。</span></p>
+    <div class="hero-kicker">OPS TRAINING</div>
+    <h1>把故障判断，<br><span>练成</span>可交付的能力。</h1>
+    <p class="hero-lead">8 周主线：专题课、实验、故障挑战、验收。<br>24 周全程：20 题笔试 + 盲排实战。<span class="lead-tail">不承诺头衔；按五步工单（现象、证据、根因、动作、验证）独立值班。</span></p>
     <div class="hero-stats" id="heroStats"></div>
     <div class="hero-acts">
       <button class="btn primary" id="homeStart" onclick="location.hash='#/camp/1'">开始第 1 周</button>
       <button class="btn ghost" onclick="location.hash='#/course'">先看专题课 →</button>
     </div>
     <div id="homeNext" style="margin-top:14px;font-size:13px;line-height:1.8;color:var(--txt-2)"></div>
-    <div class="hero-minor">
-      <button class="btn sm ghost" onclick="location.hash='#/path'">扩展路线 W9–W24</button>
-      <button class="btn sm ghost" onclick="location.hash='#/stats'">学习统计</button>
-    </div>
     <details class="hero-note">
       <summary>完整训练路径与边界</summary>
-      <p>8 周主线：专题课 + 跟练 + 自测 + 实验 + 故障挑战 + 验收，按 L1–L4 验收，w8 收「8 周主线验收包」。9–24 周是扩展路径：每周同样配齐跟练、自测、实验与故障挑战，内容齐，但不改变主线承诺；w24 的「W24 全程结业：20 题笔试 + 盲排实战」只对走完全程的人有意义。<br>不承诺“独立运维工程师”，只承诺：8 周主线能上手三类高频故障，并按五步工单独立值班。8 周主线验收看工单+复盘+l30 六题；24 周全程结业才做 W24 盲排，不看“看完”打卡。通信 / 光通信只保留题库覆盖。</p>
+      <div class="hero-minor" style="justify-content:flex-start;margin-top:12px">
+        <button class="btn sm ghost" onclick="location.hash='#/path'">扩展路线</button>
+        <button class="btn sm ghost" onclick="location.hash='#/stats'">学习统计</button>
+      </div>
+      <p>主线：专题课 + 跟练 + 自测 + 实验 + 故障挑战 + 验收，按 L1–L4 验收，收「主线验收包」。扩展路径同样逐周配齐，内容齐，但不改变主线承诺；全程结业才做笔试 + 盲排实战，只对走完全程的人有意义。<br>不承诺“独立运维工程师”，只承诺：主线能上手三类高频故障，并按五步工单独立值班。主线验收看工单 + 复盘 + 验收课六题；全程结业才做盲排，不看“看完”打卡。通信 / 光通信只保留题库覆盖。</p>
     </details>
   </div>
 
@@ -3316,8 +3356,8 @@ curl -o /dev/null -s -w "%{time_total}\n" http://127.0.0.1:8080/health
   <div class="camp-top">
     <div>
       <div class="camp-kicker">运维工程师成长训练营</div>
-      <h1>8 周主线打底，16 周扩展不冒充主线</h1>
-      <p class="camp-sub">8 周主线：专题课 + 跟练 + 自测 + 实验 + 故障 + 验收；每周 2 道跟练、3 道自测、1 个实验、1 次故障挑战，w8 收主线验收包。9–24 周为扩展路径，同样逐周配齐，但验收口径仍以 8 周主线为准。<br>教材在专题课，这里只排任务、做实验、验收；不以“看完”为完成标准。</p>
+      <h1>8 周主线打底，<br class="camp-h1-br">16 周扩展不冒充主线</h1>
+      <p class="camp-sub">先在专题课把原理读一遍，再在每周的练习、实验和故障现场里把判断做出来，最后交一份工单和一次复盘。<br>主线按这套顺序走；扩展周同样配练习和实验，但不改变主线验收。这里只排任务、做实验、验收，不以“看完”为完成标准。</p>
     </div>
     <div class="camp-stat" id="campStat"></div>
   </div>
@@ -3332,7 +3372,7 @@ curl -o /dev/null -s -w "%{time_total}\n" http://127.0.0.1:8080/health
 <!-- ===== 视图：运维命令中心 ===== -->
 <section class="view" id="view-cmd">
   <div class="hero">
-    <h1>命令中心：<span>先知道该敲什么，再知道怎么看</span></h1>
+    <h1>命令中心：<span>先知道</span>该敲什么，再知道怎么看</h1>
     <p>按命令查语法、参数、输出字段；按问题查排查链。示例可直接复制，危险命令带风险标记，发行版差异单独标注。</p>
   </div>
   <div class="cmd-bar">
@@ -3350,7 +3390,7 @@ curl -o /dev/null -s -w "%{time_total}\n" http://127.0.0.1:8080/health
 <section class="view" id="view-course">
   <div class="hero">
     <div class="hero-kicker">CAREER TRACK · 6 阶段 / 39 课</div>
-    <h1>课程主线：<br><span>从一张工单，到独立值班</span></h1>
+    <h1>课程主线：<br><span>从一张工单</span>，到独立值班</h1>
     <p>6 个阶段、39 课，按顺序学。每课从真实工单开始：看现场 → 明用途 → 拆判断 → 敲命令 → 进实验 → 6 题闭卷验收；阶段没完成，不建议跳课。</p>
   </div>
   <div id="courseList"></div>
@@ -3361,7 +3401,7 @@ curl -o /dev/null -s -w "%{time_total}\n" http://127.0.0.1:8080/health
 <section class="view" id="view-lab">
   <div class="hero">
     <div class="hero-kicker">LAB · 22 台实验机</div>
-    <h1>Linux 实验台：<br><span>敲命令，看输出，完成任务</span></h1>
+    <h1>Linux 实验台：<br><span>敲命令</span>，看输出，完成<span class="nowrap" style="color:inherit">任务</span></h1>
     <p>每台实验机是一台模拟的 Web 服务器，按任务清单敲命令推进，系统实时校验结果。命令与真实 Linux 一致，输出为预置模拟数据。</p>
   </div>
   <div class="real-bar" id="realBar" hidden>
@@ -3386,7 +3426,7 @@ curl -o /dev/null -s -w "%{time_total}\n" http://127.0.0.1:8080/health
 <!-- ===== 视图：学习路线 ===== -->
 <section class="view" id="view-path">
   <div class="hero">
-    <h1>扩展路线：<span>前 8 周看训练营，这里只做方向参考</span></h1>
+    <h1>扩展路线：<span>前 8 周看训练营</span>，这里只做方向参考</h1>
     <p>这条路线不承担主线验收；前 8 周的进度、实验、故障挑战以训练营为准。w24 的 20 题结业考已限定范围（网络、Linux、抓包、服务、安全、数据库、监控与综合案例），不纳入主线 L1–L4。</p>
   </div>
   <div id="pathMap" style="margin-top:20px"></div>
@@ -3510,7 +3550,7 @@ curl -o /dev/null -s -w "%{time_total}\n" http://127.0.0.1:8080/health
 </main>
 
 <footer class="site-foot">
-  <span><b>网络运维刷题宝典</b> · 8 周主线 / 16 周扩展 / 24 周训练路径</span>
+  <span><b>网络运维刷题宝典 · 训练版</b> · 8 周主线 / 16 周扩展 / 24 周训练路径</span>
   <span>离线模拟数据，不执行真实命令；学习进度仅存本机浏览器。</span>
 </footer>
 
@@ -5603,9 +5643,9 @@ steps:[
   {t:'cmd',q:'用 tshark 筛出 web.pcap 里的零窗口帧。',accept:["tshark -r web.pcap -Y 'tcp.analysis.zero_window'"],exp:'零窗口能直接指出“应用读不动”，这是重传之外的另一类原因。'},
   {t:'single',q:'只抓一端就下结论，最大的问题是？',o:['文件太大','无法区分“没发”和“没收到”，责任归属会判错','抓不到包','时间不准'],a:1,exp:'两端都抓才能对齐“发了没”“收到没”；单端抓包只能证明一半事实。'}
  ]},
-{id:'l17',mins:14,title:'文件查找与批量处理',diagram:null,why:'ls 只能看一个目录，找不到「忘了在哪」的文件，也没法「按大小、按时间、按类型」筛，更没法「对上千个文件执行同一条命令」。find 补的就是这三件事，也是清理磁盘、批量改权限、找残留文件的主力。',points:['find 的骨架是「起点 + 条件 + 动作」：find 路径 条件 -exec/-delete/-print','-name 支持通配但要加引号；-type f 只找文件、d 只找目录，能挡掉大量干扰','时间条件：-mtime +7 是修改超过 7 天，-mmin -30 是 30 分钟内；+ 大于、- 小于','大小条件 -size 的单位会向上取整：-size 50M 覆盖约 49–50MiB，-size +50M 表示大于 50MiB；精确判断先看 -printf 的真实字节数','-exec 结尾必须写 \\; 或 +；文件名含空格时用 -print0 配 xargs -0，否则会被拆错'],steps:[{h:'最小可用：按名字找文件',p:'忘了路径只知道后缀时，从最可能的目录开始，不要一上来扫整盘。',c:'find /var/log -name "*.log" -type f | head -5',out:'/var/log/nginx/access.log\n/var/log/nginx/error.log\n/var/log/yum.log',watch:'-name 的通配符要加引号，否则会被 shell 先展开；-type f 排除同名目录；不加路径时默认搜当前目录。'},{h:'按类型和深度：只找目录、只下两层',p:'找配置目录时，-type d 配 -maxdepth 能砍掉九成噪音。',c:'find /etc -maxdepth 2 -type d -name "*.d"',out:'/etc/sysctl.d\n/etc/security/limits.d\n/etc/nginx/conf.d',watch:'-maxdepth 从起点算层数；*.d 是「一个目录装一组配置」的通用惯例。'},{h:'按时间：最近改过的和很久没动的',p:'排查「谁改的配置」用负值，清理「多久没动」用正值。',c:'find /var/log -type f -mtime +7 -printf "%TY-%Tm-%Td %p\\n" | head -5',out:'2026-11-01 /var/log/messages-20261101\n2026-11-02 /var/log/secure-20261102',watch:'-mtime +7 是修改时间超过 7 个 24 小时；-mmin -30 是 30 分钟内；-printf 里的 %T 是修改时间。'},{h:'按大小：先列出来再决定删不删',p:'大文件清理最容易误伤，先看清单和真实大小。',c:'find /var/log -type f -size +50M -exec ls -lh {} \\;',out:'-rw-r--r--. 1 root root 128M Nov 18 03:12 /var/log/messages\n-rw-r--r--. 1 nginx nginx 64M Nov 19 09:10 /var/log/nginx/access.log',watch:'+50M 表示大于 50MiB；find 按单位向上取整，边界值（如 50.1MiB）会进入 +50M 的结果；先用 -printf "%s" 打真实字节数再删。'},{h:'文件名带空格：-print0 配 xargs -0',p:'日志和用户上传文件常见空格，直接 | xargs 会把一个名字拆成两段。',c:'find /data -type f -name "*.tmp" -print0 | xargs -0 -r rm -f',out:'（无输出，删除成功即静默）',watch:'-print0 用 NUL 分隔，xargs -0 按 NUL 读；-r 表示没有输入时不执行命令。'},{h:'删除要分两步：先看清单，再执行',p:'-delete 不能撤销，先跑一遍不带动作的版本，确认对象无误。',c:'find /tmp -maxdepth 1 -type f -mtime +3 -print | head; find /tmp -maxdepth 1 -type f -mtime +3 -delete',out:'/tmp/old-dump.tar\n/tmp/session-20261112.log',watch:'-delete 只能删文件和空目录，且隐含 -depth；先 -print 看清单是最省事的防误删手段。'},{h:'组合条件，做成可复用的巡检命令',p:'条件可以叠加，输出用 -printf 自定义，接管道排序就是一份报告。',c:'find /var/log -type f -mtime +7 -size +10M -printf "%s\\t%p\\n" | sort -rn | head -5',out:'134217728\t/var/log/messages\n67108864\t/var/log/nginx/access.log',watch:'多个条件是「与」关系；%s 是字节数，排序后最大的在最前，适合直接贴进日报。'}],cmds:[{c:'find /var/log -name "*.log" -type f',d:'按名字与类型查找',o:'/var/log/nginx/access.log',r:'通配要加引号；-type f 排除目录。',bad:'不加引号写 *.log：会被 shell 先展开成当前目录的文件名，结果完全不对。'},{c:'find /etc -maxdepth 2 -type d',d:'限制深度只找目录',o:'/etc/sysctl.d',r:'-maxdepth 从起点算层级，越小越快。',bad:'直接 find /：扫整盘，慢且刷屏。'},{c:'find . -mtime +7',d:'找修改时间超过 7 天的文件',o:'./old/app.log',r:'+ 是大于、- 是小于；单位是 24 小时。',bad:'把 +7 当「7 天前那一天」：它是「超过 7 天」，范围更大。'},{c:'find . -size +50M',d:'找大于 50MB 的文件',o:'./dump.sql',r:'-size 的单位向上取整；+50M 是大于 50MiB，50.1MiB 这类边界值会进入结果。',bad:'用 -size 50M 想找「严格 50M」：它覆盖约 49–50MiB 一档，要精确值先看 -printf 字节数。'},{c:'find . -name "*.tmp" -print0 | xargs -0 rm -f',d:'安全批量删除带空格的文件名',o:'（静默）',r:'NUL 分隔才不会被空格拆断。',bad:'直接 | xargs rm：文件名含空格时会被拆成多个参数，删错对象。'}],params:[{p:'-name',m:'按文件名匹配，支持通配，需加引号'},{p:'-type',m:'f 文件、d 目录、l 链接'},{p:'-mtime / -mmin',m:'按天 / 按分钟筛修改时间'},{p:'-size',m:'按大小筛，+ 大于、- 小于'},{p:'-exec / -delete',m:'对结果执行命令 / 直接删除'}],errors:['-name 不加引号：通配符被 shell 展开，find 收到的条件已经变形','-exec 结尾漏写 \\;：命令不报错但不执行，或把后续参数一起吃掉','先删后看：没有 -print 预演就直接 -delete，删掉的东西无法恢复'],scene:'磁盘告警后清理旧日志：先 find 按时间与大小列出清单，确认对象，再批量删除；日常巡检把同一条命令写进脚本，输出按大小排序。',verify:'写出一条命令：找出 /var/log 下超过 30 天且大于 20MB 的文件，并按大小倒序；说明 -print0 与 xargs -0 解决的是什么问题。',practice:[],quiz:[
+{id:'l17',mins:14,title:'文件查找与批量处理',diagram:null,why:'ls 只能看一个目录，找不到「忘了在哪」的文件，也没法「按大小、按时间、按类型」筛，更没法「对上千个文件执行同一条命令」。find 补的就是这三件事，也是清理磁盘、批量改权限、找残留文件的主力。',points:['find 的骨架是「起点 + 条件 + 动作」：find 路径 条件 -exec/-delete/-print','-name 支持通配但要加引号；-type f 只找文件、d 只找目录，能挡掉大量干扰','时间条件：-mtime +7 匹配 8 个完整 24 小时及以上（按天向下取整），7 天半前不会被选中；-mmin -30 是 30 分钟内；+ 大于、- 小于','大小条件 -size 的单位会向上取整：-size 50M 覆盖约 49–50MiB，-size +50M 表示大于 50MiB；精确判断先看 -printf 的真实字节数','-exec 结尾必须写 \\; 或 +；文件名含空格时用 -print0 配 xargs -0，否则会被拆错'],steps:[{h:'最小可用：按名字找文件',p:'忘了路径只知道后缀时，从最可能的目录开始，不要一上来扫整盘。',c:'find /var/log -name "*.log" -type f | head -5',out:'/var/log/nginx/access.log\n/var/log/nginx/error.log\n/var/log/yum.log',watch:'-name 的通配符要加引号，否则会被 shell 先展开；-type f 排除同名目录；不加路径时默认搜当前目录。'},{h:'按类型和深度：只找目录、只下两层',p:'找配置目录时，-type d 配 -maxdepth 能砍掉九成噪音。',c:'find /etc -maxdepth 2 -type d -name "*.d"',out:'/etc/sysctl.d\n/etc/security/limits.d\n/etc/nginx/conf.d',watch:'-maxdepth 从起点算层数；*.d 是「一个目录装一组配置」的通用惯例。'},{h:'按时间：最近改过的和很久没动的',p:'排查「谁改的配置」用负值，清理「多久没动」用正值。',c:'find /var/log -type f -mtime +7 -printf "%TY-%Tm-%Td %p\\n" | head -5',out:'2026-11-01 /var/log/messages-20261101\n2026-11-02 /var/log/secure-20261102',watch:'-mtime +7 会先按完整 24 小时向下取整，因此匹配 8 天及以上；7 天半前不在结果里；-mmin -30 是 30 分钟内；-printf 里的 %T 是修改时间。'},{h:'按大小：先列出来再决定删不删',p:'大文件清理最容易误伤，先看清单和真实大小。',c:'find /var/log -type f -size +50M -exec ls -lh {} \\;',out:'-rw-r--r--. 1 root root 128M Nov 18 03:12 /var/log/messages\n-rw-r--r--. 1 nginx nginx 64M Nov 19 09:10 /var/log/nginx/access.log',watch:'+50M 表示大于 50MiB；find 按单位向上取整，边界值（如 50.1MiB）会进入 +50M 的结果；先用 -printf "%s" 打真实字节数再删。'},{h:'文件名带空格：-print0 配 xargs -0',p:'日志和用户上传文件常见空格，直接 | xargs 会把一个名字拆成两段。',c:'find /data -type f -name "*.tmp" -print0 | xargs -0 -r rm -f',out:'（无输出，删除成功即静默）',watch:'-print0 用 NUL 分隔，xargs -0 按 NUL 读；-r 表示没有输入时不执行命令。'},{h:'删除要分两步：先看清单，再执行',p:'-delete 不能撤销，先跑一遍不带动作的版本，确认对象无误。',c:'find /tmp -maxdepth 1 -type f -mtime +3 -print | head; find /tmp -maxdepth 1 -type f -mtime +3 -delete',out:'/tmp/old-dump.tar\n/tmp/session-20261112.log',watch:'-delete 只能删文件和空目录，且隐含 -depth；先 -print 看清单是最省事的防误删手段。'},{h:'组合条件，做成可复用的巡检命令',p:'条件可以叠加，输出用 -printf 自定义，接管道排序就是一份报告。',c:'find /var/log -type f -mtime +7 -size +10M -printf "%s\\t%p\\n" | sort -rn | head -5',out:'134217728\t/var/log/messages\n67108864\t/var/log/nginx/access.log',watch:'多个条件是「与」关系；%s 是字节数，排序后最大的在最前，适合直接贴进日报。'}],cmds:[{c:'find /var/log -name "*.log" -type f',d:'按名字与类型查找',o:'/var/log/nginx/access.log',r:'通配要加引号；-type f 排除目录。',bad:'不加引号写 *.log：会被 shell 先展开成当前目录的文件名，结果完全不对。'},{c:'find /etc -maxdepth 2 -type d',d:'限制深度只找目录',o:'/etc/sysctl.d',r:'-maxdepth 从起点算层级，越小越快。',bad:'直接 find /：扫整盘，慢且刷屏。'},{c:'find . -mtime +7',d:'找修改时间满 8 天及以上的文件',o:'./old/app.log',r:'find 按完整 24 小时向下取整；+7 是 8 天及以上，不是“7 天前那一天”。',bad:'把 +7 当「刚好 7 天前」：它是 8 天及以上，7 天半前的文件不会被选中。'},{c:'find . -size +50M',d:'找大于 50MB 的文件',o:'./dump.sql',r:'-size 的单位向上取整；+50M 是大于 50MiB，50.1MiB 这类边界值会进入结果。',bad:'用 -size 50M 想找「严格 50M」：它覆盖约 49–50MiB 一档，要精确值先看 -printf 字节数。'},{c:'find . -name "*.tmp" -print0 | xargs -0 rm -f',d:'安全批量删除带空格的文件名',o:'（静默）',r:'NUL 分隔才不会被空格拆断。',bad:'直接 | xargs rm：文件名含空格时会被拆成多个参数，删错对象。'}],params:[{p:'-name',m:'按文件名匹配，支持通配，需加引号'},{p:'-type',m:'f 文件、d 目录、l 链接'},{p:'-mtime / -mmin',m:'按天 / 按分钟筛修改时间；+7 按 24 小时取整，是 8 天及以上'},{p:'-size',m:'按大小筛，+ 大于、- 小于'},{p:'-exec / -delete',m:'对结果执行命令 / 直接删除'}],errors:['-name 不加引号：通配符被 shell 展开，find 收到的条件已经变形','-exec 结尾漏写 \\;：命令不报错但不执行，或把后续参数一起吃掉','先删后看：没有 -print 预演就直接 -delete，删掉的东西无法恢复'],scene:'磁盘告警后清理旧日志：先 find 按时间与大小列出清单，确认对象，再批量删除；日常巡检把同一条命令写进脚本，输出按大小排序。',verify:'写出一条命令：找出 /var/log 下超过 30 天且大于 20MB 的文件，并按大小倒序；说明 -print0 与 xargs -0 解决的是什么问题。',practice:[],quiz:[
   {t:'single',q:'find /var/log -name "*.log" 里引号的作用是？',o:['让 find 支持通配符','防止 shell 提前展开通配符','提高查找速度','区分大小写'],a:1,exp:'不加引号时 shell 会先把 *.log 展开成当前目录里的文件名，find 收到的参数就变了。'},
-  {t:'cmd',q:'在 /var/log 下找出 7 天前修改过的 .log 文件。',accept:['find /var/log -name "*.log" -mtime +7'],exp:'-name 限类型，-mtime +7 表示修改时间在 7 天以前。'},
+  {t:'cmd',q:'在 /var/log 下找出修改时间满 8 天及以上的 .log 文件。',accept:['find /var/log -name "*.log" -mtime +7'],exp:'-name 限类型；-mtime +7 按完整 24 小时向下取整，实际匹配 8 天及以上，不是“7 天前那一天”。'},
   {t:'cmd',q:'找出根目录下大于 100M 的普通文件，并丢弃无权访问的报错。',accept:['find / -type f -size +100M 2>/dev/null'],exp:'-type f 排除目录，2>/dev/null 把 Permission denied 丢掉，结果才干净。'},
   {t:'single',q:'-exec … {} \\; 和 -exec … {} + 的区别是？',o:['没有区别','前者每个文件执行一次，后者批量拼接后执行','后者不支持管道','前者只能用于 rm'],a:1,exp:'文件多时 {} + 只起一个进程，快很多；但输出会合并，需要逐条结果时用 \\;。'},
   {t:'single',q:'刚创建的文件用 locate 查不到，最可能的原因是？',o:['文件没权限','locate 数据库还没更新','文件名不合法','locate 不支持该目录'],a:1,exp:'locate 查的是数据库快照，updatedb 之后新文件才会进去。'},
@@ -5995,7 +6035,7 @@ steps:[
   {t:'single',q:'复盘 Action 表里，每一项必须有什么？',o:['只写改进方向','owner、截止时间、验收方式','只写责任人','只写“加强监控”'],a:1,exp:'没有 owner/截止/验收的 Action 不会落地，复盘就退化成经过叙述。'}
  ]}
 ,{id:'l31',mins:18,title:'交换与路由：先证明路径，再抓包',diagram:'forward',
- why:'“网络不通”最容易犯的错是直接 tcpdump，抓了一堆包却不知道路径断在哪。二层看 ARP/VLAN，三层看路由/最长前缀，出口看 NAT；先证明一个包应该走哪条路，再决定在哪个接口抓什么过滤。信令抓包（SIP 5060/RTP）的过滤与握手判读已有专题课，这一课只补“路径证明”。',
+ why:'“网络不通”最容易犯的错是直接 tcpdump，抓了一堆包却不知道路径断在哪。二层看 ARP/VLAN，三层看路由/最长前缀，出口看 NAT；先证明一个包应该走哪条路，再决定在哪个接口抓什么过滤。SIP 5060/RTP 的过滤与判读已有题库覆盖，这一课只补“路径证明”。',
  points:[
   '同网段先看 ARP：ip neigh 的 REACHABLE 才是解析成功；STALE 是缓存过期但还可尝试，FAILED 才是没解析到',
   'VLAN 是二层隔离：access 口只放一个 VLAN，trunk 口带 tag 放多个 VLAN；VLAN 不通先看 bridge vlan show，不要先怪路由',
@@ -6879,7 +6919,7 @@ drwxr-xr-x 2 root root 4.0K Aug 12 09:10 nginx
 {id:'find',n:'find',full:'search for files in a directory hierarchy',cat:'文件与目录',os:'通用',root:0,mod:0,risk:0,
  sum:'按条件遍历查找文件，是“文件在哪/谁占空间/哪些太老”的通用工具。',
  syn:'find /var/log -type f -size +100M',
- params:[['-type f/d/l','按类型：文件/目录/链接','find /etc -type f'],['-name / -iname','按名字，后者忽略大小写','find / -name "*.conf"'],['-size +100M','大于 100M（- 小于，无符号等于）','find /var -size +100M'],['-mtime +7','修改时间在 7 天前','find /backup -mtime +7'],['-exec ... \\;','对每个结果执行命令','find /tmp -name "*.tmp" -delete']],
+ params:[['-type f/d/l','按类型：文件/目录/链接','find /etc -type f'],['-name / -iname','按名字，后者忽略大小写','find / -name "*.conf"'],['-size +100M','大于 100M（- 小于，无符号等于）','find /var -size +100M'],['-mtime +7','修改时间满 8 天及以上（按 24 小时取整）','find /backup -mtime +7'],['-exec ... \\;','对每个结果执行命令','find /tmp -name "*.tmp" -delete']],
  ex:[{c:'find /var -xdev -type f -size +50M -printf "%s %p\\n" | sort -rn | head',d:'找出 /var 下最大的几个文件',
    o:`1073741824 /var/log/big.log
 536870912 /var/lib/mysql/ib_logfile0`}],
@@ -8256,24 +8296,65 @@ function loadCamp(){
 let CAMP=loadCamp();
 function saveCamp(){ try{ localStorage.setItem(CAMP_KEY,JSON.stringify(CAMP)); }catch(e){} }
 function campW(n){ if(!CAMP.week[n]) CAMP.week[n]={read:0,quiz:0,lab:0,fault:0,level:0,ts:0}; return CAMP.week[n]; }
-function campLevel(n){
- const w=CAMP.week[n]||{}, L=CAMP_LESSONS[n];
- const labPass=!!(L&&!L.noLab&&labDoneFor(n,L.lab.id));
- let lv=0;
- if(w.read||w.quiz>0||labPass||w.fault) lv=1;
- if(w.quiz>=80||labPass) lv=2;
- if(labPass) lv=3;
- if(labPass&&w.fault) lv=4;
- return lv;
+// 单一事实源：周关联专题课全部 6/6 完成，周已读才是真的
+function weekReadDone(n){
+  const L=CAMP_LESSONS[n];
+  const ids=(L&&L.lesson)||[];
+  return ids.length>0 && ids.every(id=>DB.lessonDone.includes(id));
 }
-// 已在别处完成实验/考核时，补齐本单元已发生的事实，保证侧栏、薄弱点、徽章三处一致
+// 课程完成只认本课闭卷 6/6；营内考核不再回写任何课程
+// 单课完成必须有本课真实闭卷成绩：total 必须等于该课题目数，right 必须全对
+function lessonPerfect(id){
+  const l=LESSONS_MAP[id], r=DB.lessonQuiz&&DB.lessonQuiz[id];
+  return !!(l&&l.quiz&&r&&r.total===l.quiz.length&&r.right===r.total);
+}
+const W8_EV_MIN={phenomenon:8,evidence:12,root:10,action:12,verify:10};
+function w8EvidenceDraftComplete(e){
+  e=e||{};
+  return Object.keys(W8_EV_MIN).every(k=>String(e[k]||'').trim().length>=W8_EV_MIN[k]);
+}
+function w8EvidenceComplete(){ return w8EvidenceDraftComplete(DB.w8Evidence||{}); }
+const W8_REVIEW_MIN={why1:6,why2:6,why3:6,why4:6,why5:8,monitor:10,process:10,owner:2,deadline:8,acceptance:10};
+function w8ReviewDraftComplete(r){
+  r=r||{};
+  if(!Object.keys(W8_REVIEW_MIN).every(k=>String(r[k]||'').trim().length>=W8_REVIEW_MIN[k])) return false;
+  const monitor=String(r.monitor||'').trim(), process=String(r.process||'').trim();
+  if(monitor===process) return false;
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(String(r.deadline||'').trim())) return false;
+  return /监控|流程|告警|发布|巡检|拦住/.test(String(r.why5||'').trim());
+}
+function w8ReviewComplete(){ return w8ReviewDraftComplete(DB.w8Review||{}); }
+function campLevel(n){
+  const w=CAMP.week[n]||{}, L=CAMP_LESSONS[n];
+  if(!L) return 0;
+  const labPass=!!(!L.noLab&&labDoneFor(n,L.lab.id));
+  const readDone=weekReadDone(n);
+  let lv=0;
+  if(readDone||w.quiz>0||labPass||w.fault) lv=1;
+  if(w.quiz>=80||labPass) lv=2;
+  if(labPass) lv=3;
+  if(labPass&&w.fault) lv=4;
+  // W8 主线验收：五段证据 + 结构化复盘 + l30 真实 6/6 独立记录 + 实验 + 故障，缺一不判 L4
+  if(n===8 && !(DB.w8SubmittedAt && w8EvidenceComplete() && DB.w8ReviewSubmittedAt && w8ReviewComplete() && lessonPerfect('l30'))) lv=Math.min(lv,3);
+  // W24 全程结业：20 题笔试 >=80 且 W24 盲排通过，缺一不判 L4
+  if(n===24){
+    const blindOk=!!(DB.labBlindDone && DB.labBlindDone[L.lab.id]);
+    const finalOk=!!(DB.finalPassed && typeof DB.finalScore==='number' && DB.finalScore>=80);
+    if(!(finalOk && blindOk && labPass)) lv=Math.min(lv,3);
+  }
+  return lv;
+}
+// 周 read 只做派生/兼容展示，不再从实验或考核反推为独立进度
 function campNormalize(){
- Object.keys(CAMP_LESSONS).forEach(k=>{
-  const n=+k, w=campW(n), L=CAMP_LESSONS[n];
-  if(labDoneFor(n,L.lab.id)&&!w.lab) w.lab=1;
-  if((w.quiz>0||w.lab)&&!w.read) w.read=1;
- });
- saveCamp();
+  Object.keys(CAMP_LESSONS).forEach(k=>{
+    const n=+k, w=campW(n), L=CAMP_LESSONS[n];
+    if(!L) return;
+    if(labDoneFor(n,L.lab.id)&&!w.lab) w.lab=1;
+    const readDone=weekReadDone(n);
+    if(readDone&&!w.read){ w.read=1; w.ts=Date.now(); }
+    else if(!readDone&&w.read){ w.read=0; }
+  });
+  saveCamp();
 }
 function campLvName(lv){ return ['未开始','L1 知道','L2 理解','L3 会做','L4 会排障'][lv]; }
 function todayKey(){ const d=new Date(); return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(); }
@@ -8402,7 +8483,7 @@ done`,
   {c:'chmod 2775 /data/share',d:'2 是 SGID：目录内新建文件自动继承 share 组，团队协作目录的标准配法。',o:'drwxrwsr-x 2 root share ... share',bad:'只给 775 不加 2，新文件属组会变成创建者自己的主组，别人又读不了'},
   {c:'setfacl -m u:alice:rx /data/share',d:'只给 alice 一个例外权限，不动其他任何人的权限。',o:'（无输出）getfacl 里会多出 user:alice:r-x',bad:'为了一个人直接 chmod 777，等于对所有人开放'}
  ],
- lab:{id:'lab-perm',name:'实验二：权限与属主',note:'页面内模拟终端：预置了 ops、alice 两个用户和 /data/share 目录，行为按真实 Linux 规则判定；不是真实主机，结论需在真实环境复核。',
+ lab:{id:'lab-perm',name:'W02：权限与属主',note:'页面内模拟终端：预置了 ops、alice 两个用户和 /data/share 目录，行为按真实 Linux 规则判定；不是真实主机，结论需在真实环境复核。',
   steps:['ls -ld /data/share 看目录权限与属组','制造一次 Permission denied：以 alice 身份读 ops 家目录下的 notes.txt','用 chmod 修正目录 x 位，再验证能否进入','用 setfacl 给 alice 单独授权并用 getfacl 复查']},
  deep:[
   {h:'权限检查按身份走一条路，不是三组叠加',p:'内核按「属主 → 属组 → 其他」顺序匹配，命中一类就只用那一类位判断，不会再合并。所以属主为 root 的 700 文件，你在 root 组也打不开——你走的是「其他」那一档。',
@@ -8494,7 +8575,7 @@ done | head -50`,
   {c:'journalctl -u nginx -n 30 --no-pager',d:'看该服务最近 30 行日志，--no-pager 避免进入 less 翻页。',o:'Aug 12 09:20:11 web01 nginx[3201]: bind() to 0.0.0.0:8080 failed (98: Address already in use)',bad:'直接 journalctl 不带 -u 会看到全系统日志，噪声太大'},
   {c:'kill -TERM 3201',d:'给进程发优雅退出信号。等 5 秒还在再考虑 -9。',o:'（无输出即已投递）',bad:'上来就 kill -9，正在写盘的进程可能留下半截文件'}
  ],
- lab:{id:'lab-svc',name:'实验三：Nginx 起不来，排障到修好',note:'页面内模拟终端：服务状态与日志是预置场景，按真实排查顺序判定；模拟不产生真实进程，结论需在真实环境复核。',
+ lab:{id:'lab-svc',name:'W03：Nginx 起不来，排障到修好',note:'页面内模拟终端：服务状态与日志是预置场景，按真实排查顺序判定；模拟不产生真实进程，结论需在真实环境复核。',
   steps:['systemctl status nginx 看失败状态与原因','journalctl -u nginx 找到第一条报错','修正后 systemctl restart nginx','systemctl enable nginx 设为开机自启']},
  deep:[
   {h:'ps 的 STAT 列，每个字母都是一条线索',p:'看到进程卡住还是跑满，先看 STAT 第一个字母，再决定用什么手段。',
@@ -8663,8 +8744,8 @@ log=/var/log/nginx/access.log
 mv "$log" "$log.$d"                     # 先改名，nginx 仍持有旧 inode
 kill -USR1 "$(cat /var/run/nginx.pid)"  # 通知 nginx 重开新文件
 gzip -9 "$log.$d"                       # 压缩归档
-find /var/log/nginx -name '*.gz' -mtime +7 -delete   # 清理 7 天前`,
-   note:'逐行要点：① 必须先 mv 再 USR1：顺序反了 nginx 会继续写旧文件；② USR1 是 nginx 约定的“重开日志”信号，不需要重启；③ gzip -9 最费 CPU 但体积最小，日志量大时用 -1；④ find -mtime +7 按修改时间清理。容器环境没有 pid 文件，改用 docker kill -s USR1 <容器>。'}
+find /var/log/nginx -name '*.gz' -mtime +7 -delete   # 清理 8 天及以上`,
+   note:'逐行要点：① 必须先 mv 再 USR1：顺序反了 nginx 会继续写旧文件；② USR1 是 nginx 约定的“重开日志”信号，不需要重启；③ gzip -9 最费 CPU 但体积最小，日志量大时用 -1；④ find -mtime +7 按完整 24 小时取整，清理 8 天及以上。容器环境没有 pid 文件，改用 docker kill -s USR1 <容器>。'}
  ],
  fault:{scene:'监控报警磁盘使用率 95%，但 df -h 显示还有 3G；你新建一个 10M 文件却报 No space left on device。要求给出排查顺序和两种可能的原因。',
   hint:'空间有三种“满”：块满、inode 满、被删除但仍被进程占用的句柄。',
@@ -9348,7 +9429,7 @@ done`,
   {c:'ss -tan | awk "NR>1{print $1}" | sort | uniq -c | sort -rn',d:'按状态列统计，找出占比最高的那个状态。排查连接异常时的第一张表。',o:'     88 ESTAB\n     12 TIME-WAIT\n      3 CLOSE-WAIT',bad:'awk 取错列（把 Local Address 当状态）会得到一堆地址，看不出问题'},
   {c:'nc -zv 10.0.0.20 80',d:'探测端口是否能建连。-z 只探不传数据，-v 输出结果。返回 succeeded 表示三次握手完成。',o:'Connection to 10.0.0.20 80 port [tcp/http] succeeded!',bad:'用 telnet 探测时对端回了 banner 就以为正常，实际可能只是端口开着、应用已异常'}
  ],
- lab:{id:'lab-pcap',name:'实验六：抓包读包，判断谁没回',note:'页面内模拟终端：抓包输出、握手/RST 与重传为预置快照，命令参数按真实 tcpdump/tshark 语义校验；不是真实网卡。',
+ lab:{id:'lab-pcap',name:'实验六A：抓包读包，判断谁没回',note:'页面内模拟终端：抓包输出、握手/RST 与重传为预置快照，命令参数按真实 tcpdump/tshark 语义校验；不是真实网卡。',
   steps:['ss -tlnp 看监听','tcpdump 抓 80 端口握手','看 SYN/SYN-ACK/ACK 是否完整','抓 RST 或重传判断谁没回','tshark 离线统计重传','ss -lunp 看 UDP 无连接']},
  deep:[
   {h:'常用状态与处置方向',p:'同样的“连不上”，状态不同，责任方完全不同。先看状态，再决定找谁。',
@@ -9504,7 +9585,7 @@ done`,
   {c:'tshark -r /tmp/80.pcap -q -z io,phs',d:'统计 pcap 里的协议分层与包数，先看清这批包里到底有什么。',o:'eth 100%\ntcp 92.0%\nhttp 8.0%',bad:'直接 -V 全量打印，几万行输出根本读不完'},
   {c:'tshark -r /tmp/80.pcap -Y "tcp.analysis.retransmission" -c 10',d:'筛出重传包。抓完再筛，比抓的时候猜过滤条件可靠。',o:'1 0.000000 10.0.0.21 → 10.0.0.9 TCP [Retransmission] 51240 → 8080',bad:'把 tcp.analysis.* 写进 tcpdump 过滤表达式，直接语法错误'}
  ],
- lab:{id:'lab-pcap',name:'实验六：抓包读包，判断谁没回',note:'页面内模拟终端：tcpdump 的 -w 会生成 pcap 占位并置判定标记，包内容为预置快照；不是真实抓包，真实环境请在虚拟机用 tcpdump + tshark 复做。',
+ lab:{id:'lab-pcap',name:'实验六B：抓包可信度与过滤',note:'页面内模拟终端：tcpdump 的 -w 会生成 pcap 占位并置判定标记，包内容为预置快照；不是真实抓包，真实环境请在虚拟机用 tcpdump + tshark 复做。',
   steps:['列出网卡，确认要抓哪一块','用 -w 落盘，避免刷屏','按端口过滤抓少量包','读包判断是 SYN 没回还是 RST 拒接']},
  deep:[
   {h:'drop 与 captured 不一致，说明这批包不能用',p:'内核给 tcpdump 的环形缓冲区有限，流量大时来不及写盘就会丢。丢了关键的三次握手，后面所有推理都失效。',
@@ -9581,7 +9662,7 @@ fi`,
   {c:'tshark -r x.pcap -Y "tcp.flags.reset==1" -c 10',d:'所有 RST。配合看它的 seq/ack 和出现时机，判断是握手拒绝还是传输中断。',o:'3 0.002 10.0.0.9 → 10.0.0.21 TCP [RST, ACK] 8080 → 51240',bad:'看到 RST 就归因防火墙，实际常见是端口没监听'},
   {c:'tshark -r x.pcap -Y "http.request" -T fields -e http.host -e http.request.uri',d:'只看请求的主机与路径，快速确认这批流量到底在访问什么。',o:'www.example.com\t/api/health',bad:'用 -V 全量输出，几万行里找不到关键那一行'}
  ],
- lab:{id:'lab-pcap',name:'实验六：抓包读包，判断谁没回',note:'页面内模拟终端：会按关键词返回预置包序列（含 RST 与重传），用于练习判读；不是真实抓包环境。',
+ lab:{id:'lab-pcap',name:'实验六C：TCP 深度判读',note:'页面内模拟终端：会按关键词返回预置包序列（含 RST、零窗口与重传），用于练习判读；不是真实抓包环境。',
   steps:['tcpdump -w 落盘生成 pcap','按端口过滤抓少量包','读包确认是 SYN 无响应还是 RST','判断拒绝来自哪一侧']},
  deep:[
   {h:'重传判读三步：方向、间隔、缺口',p:'同样叫重传，处理方式完全不同。判断顺序固定：先看谁在重传，再看间隔是否成倍增长，最后看有没有重复 ACK。',
@@ -9728,7 +9809,7 @@ fi`,
   {c:'tail -30 /var/log/nginx/error.log',d:'Nginx 的 upstream 报错都在这里，包含实际连接地址与错误码。',o:'connect() failed (111: Connection refused) while connecting to upstream, upstream: "http://127.0.0.1:8080/"',bad:'只看 access.log 的 502，不追 error.log，永远不知道连的是谁'},
   {c:'journalctl -u nginx --since "-10min" --no-pager',d:'看服务自身是否重启、配置是否加载失败。reload 失败会留明确日志。',o:'reconfiguring nginx configuration, but nginx is not running',bad:'不限定时间范围，翻几百页历史日志找不到刚才那次失败'}
  ],
- lab:{id:'lab-svc',name:'实验三：Nginx 起不来，排障到修好',note:'页面内模拟终端：状态、日志与配置校验为预置快照，判定按真实流程（必须先取证再修）；不是真实主机。',
+ lab:{id:'lab-svc',name:'W03：Nginx 起不来，排障到修好',note:'页面内模拟终端：状态、日志与配置校验为预置快照，判定按真实流程（必须先取证再修）；不是真实主机。',
   steps:['systemctl status 看失败原因','journalctl 找第一条错误','nginx -t 校验配置','修正后 reload','确认端口与开机自启']},
  deep:[
   {h:'502 的六种成因与对应证据',p:'同一个状态码，六条不同路径。表格里每一项都能用一条命令确认，不需要猜。',
@@ -9893,7 +9974,7 @@ pidstat -d 1 2 2>/dev/null | awk '$4!=""' | tail -6`,
   {c:'iptables -L -n -v --line-numbers',d:'看当前规则与命中计数，判断哪条在生效、哪条从未命中。',o:'Chain INPUT (policy DROP)\nnum  pkts bytes target  prot opt source      destination\n1   9821 1.2M  ACCEPT  all  --  0.0.0.0/0   0.0.0.0/0  state RELATED,ESTABLISHED',bad:'只看 iptables -L 不加 -v，看不到命中数，无法判断规则是否真的在拦'},
   {c:'getenforce; ls -Z /var/www/html',d:'先看 SELinux 是 Enforcing 还是 Disabled，再看文件的安全上下文。',o:'Enforcing\nsystem_u:object_r:httpd_sys_content_t:s0 index.html',bad:'把 SELinux 直接 setenforce 0 当解决方案，等于关掉一层防护'}
  ],
- lab:{id:'lab-sec',name:'实验二十：sudo、SSH、SELinux，安全边界四层',note:'页面内模拟终端：sudo -l、sshd -T、firewall-cmd、getenforce、ls -Z、restorecon 为预置快照，命令参数按真实语义校验；不是真实主机。',
+ lab:{id:'lab-sec',name:'W18：sudo、SSH、SELinux，安全边界四层',note:'页面内模拟终端：sudo -l、sshd -T、firewall-cmd、getenforce、ls -Z、restorecon 为预置快照，命令参数按真实语义校验；不是真实主机。',
   steps:['sudo -l 看授权边界','sshd -T 读运行时策略','firewall-cmd 看默认放行','getenforce 看 SELinux 模式','ls -Z 看文件上下文','restorecon 恢复默认上下文']},
  deep:[
   {h:'SSH 加固项与风险',p:'每一项都能减少一类攻击面，但都有“把自己锁在外面”的风险，改完必须留后路。',
@@ -10507,7 +10588,7 @@ Object.assign(CAMP_LESSONS[12],{"lab": {"id": "lab-http", "name": "实验十九�
 Object.assign(CAMP_LESSONS[15],{"lab": {"id": "lab-nginx", "name": "实验二十一：Nginx 部署，配置生效与 HTTPS 验收", "note": "页面内模拟终端：nginx 状态与配置为预置现场，nginx -t、reload、ss 与 curl 按真实语义判定；TLS 证书校验只演示流程，真实环境请在虚拟机复做。", "steps": ["nginx -t 校验语法", "带行号读配置定位 listen 与 location", "确认 80/443 在监听", "curl 端到端验状态码", "openssl 验证书链", "reload 平滑生效"]}});
 Object.assign(CAMP_LESSONS[16],{"lab": {"id": "lab-triage", "name": "W16｜综合故障排查：七项取证 + 一份报告", "note": "页面内模拟终端：nginx 处于 running、上游 8080 时好时坏、证书临期为预置现场；七项取证按真实命令语义判定；报告必须写全五段，openssl 只演示流程，真实环境请在虚拟机复核。", "steps": ["systemctl status 看服务", "ss -lntp 看监听", "tail error.log 看上游", "curl 直连 8080 判断没回还是回错", "openssl 看证书有效期", "nginx -t 校验配置", "journalctl 排除 OOM 与重启", "写报告：现象/证据/根因/动作/验证"]}});
 Object.assign(CAMP_LESSONS[17],{"lab": {"id": "lab-perf", "name": "实验十六：性能观测，先把“卡”拆成四类资源", "note": "页面内模拟终端：load、vmstat、free、iostat、pidstat 输出为预置快照，参数按真实语义解析；不是真实主机，结论需在真实环境复核。", "steps": ["读 1/5/15 分钟 load", "算每核排队量", "vmstat 分 r 与 b", "free 看 available", "iostat 看 await 与 %util", "pidstat 落到进程"]}});
-Object.assign(CAMP_LESSONS[18],{"lab": {"id": "lab-sec", "name": "实验二十：sudo、SSH、SELinux，安全边界四层", "note": "页面内模拟终端：sudo -l、sshd -T、firewall-cmd、getenforce、ls -Z 的输出为预置快照，按四层取证判定；不要用 setenforce 0 掩盖问题。", "steps": ["sudo -l 找 ALL/NOPASSWD", "读 sshd 运行时策略", "看防火墙默认 zone", "确认 SELinux 模式", "查 Web 目录上下文"]}});
+Object.assign(CAMP_LESSONS[18],{"lab": {"id": "lab-sec", "name": "W18：sudo、SSH、SELinux，安全边界四层", "note": "页面内模拟终端：sudo -l、sshd -T、firewall-cmd、getenforce、ls -Z 的输出为预置快照，按四层取证判定；不要用 setenforce 0 掩盖问题。", "steps": ["sudo -l 找 ALL/NOPASSWD", "读 sshd 运行时策略", "看防火墙默认 zone", "确认 SELinux 模式", "查 Web 目录上下文"]}});
 Object.assign(CAMP_LESSONS[19],{"lab": {"id": "lab-shell", "name": "实验十一：把清理脚本改成可重跑", "note": "页面内模拟终端：clean.sh 为预置脚本，bash -n 与 shellcheck 结果按真实规则判定，dry-run 只打印不删；真实环境请复制脚本重做。", "steps": ["读脚本找错误处理与引号", "bash -n 语法检查", "改 set -euo pipefail", "给变量加双引号", "shellcheck 复查", "dry-run 后再真执行"]}});
 Object.assign(CAMP_LESSONS[20],{"lab": {"id": "lab-python", "name": "实验十二：Python 巡检脚本，先修安全再对账", "note": "页面内模拟终端：health.py 与 hosts.json 为预置文件，shell=False、timeout、结果落盘按代码内容判定；不执行真实远程命令。", "steps": ["看脚本与 hosts.json", "读主机数量", "去掉 shell=True", "加 timeout=3", "dry-run 打印动作", "落盘 results.json 并复核"]}});
 Object.assign(CAMP_LESSONS[21],{"lab": {"id": "lab-docker", "name": "实验十三：Docker Compose 与 K8s Pod，按依赖验证", "note": "页面内模拟终端：compose 文件、容器状态、Pod 事件为预置快照，按依赖顺序判定；容器与 Pod 不在模拟层真启动，需真实环境验证。", "steps": ["看 compose 的服务与依赖", "compose config 校验", "按依赖起栈", "查四服务 running", "看 web 日志", "停 db 观察再恢复"]}});
@@ -11078,12 +11159,23 @@ const LV_NAME={1:'基础',2:'进阶',3:'高手'};
 
 // ==================== 本地存储 ====================
 const STORE_KEY='opsQuizV1';
+function dbDefaults(){
+  return {rec:{},wrong:[],fav:[],lessonDone:[],lessonQuiz:{},labDone:[],labWeekly:{},labSave:{},labProg:{},labBlind:false,labBlindDone:{},finalScore:null,finalPassed:false,w8Evidence:null,w8SubmittedAt:0,w8Review:null,w8ReviewSubmittedAt:0};
+}
+function courseProofDone(d,id){
+  const l=LESSONS_MAP[id], q=d&&d.lessonQuiz&&d.lessonQuiz[id];
+  return !!(l&&l.quiz&&q&&q.total===l.quiz.length&&q.right===q.total);
+}
+function cleanLessonDone(d){
+  d.lessonDone=(Array.isArray(d.lessonDone)?d.lessonDone:[]).filter(id=>courseProofDone(d,id));
+  return d;
+}
 function loadDB(){
   try{
     const d = JSON.parse(localStorage.getItem(STORE_KEY));
-    if(d && typeof d==='object') return migrateLabWeekly(Object.assign({rec:{},wrong:[],fav:[],lessonDone:[],labDone:[],labWeekly:{},labSave:{},labProg:{},labBlind:false},d));
+    if(d && typeof d==='object') return cleanLessonDone(migrateLabWeekly(Object.assign(dbDefaults(),d)));
   }catch(e){}
-  return {rec:{},wrong:[],fav:[],lessonDone:[],labDone:[],labWeekly:{},labSave:{},labProg:{},labBlind:false};
+  return dbDefaults();
 }
 // 旧版只按实验 id 记“已通过”，同一个实验被多周共用会串号。
 // 迁移规则：旧记录只归给该实验绑定的第一周，其余周仍需真做一次。
@@ -11108,7 +11200,7 @@ function labDoneFor(n,labId){
 }
 let DB = loadDB();
 // 任何 DB 重建路径都必须带全字段，否则 campLevel 的 includes 会抛错
-function dbBlank(){ return {rec:{},wrong:[],fav:[],lessonDone:[],labDone:[],labWeekly:{},labSave:{},labProg:{},labBlind:false}; }
+function dbBlank(){ return dbDefaults(); }
 let _saveT=null,_savePending=false;
 function saveDBnow(){
   try{ localStorage.setItem(STORE_KEY, JSON.stringify(DB)); }
@@ -12182,7 +12274,7 @@ function campStreak(){
   }
   return n;
 }
-function campDoneCount(){ return Object.keys(CAMP.week||{}).filter(w=>campLevel(+w)>0).length; }
+function campDoneCount(){ let n=0; for(let w=1;w<=8;w++){ if(weekReadDone(w)) n++; } return n; }
 function campLv3Count(){ return Object.keys(CAMP.week||{}).filter(w=>+w<=8&&campLevel(+w)>=3).length; }
 
 function renderCampTop(){
@@ -12750,7 +12842,7 @@ Object.assign(WEEK_DAYS,{
    {k:'做',h:'第一步：打包带日期',b:'tar -czf 加 date。',tip:'目标路径含日期。',
     run:{acc:['tar','date'],ans:'tar -czf /backup/etc-$(date +%F).tar.gz /etc/nginx',h1:'文件名要能区分每天',h2:'tar 加 date',h3:'tar -czf /backup/etc-$(date +%F).tar.gz /etc/nginx',why:'日期格式用 %F（YYYY-MM-DD），排序即时间顺序，清理策略才好写。'}},
    {k:'做',h:'第二步：保留 7 天',b:'按修改时间删。',tip:'find -mtime +7 -delete。',
-    run:{acc:['find','-mtime','delete'],ans:'find /backup -name "etc-*.tar.gz" -mtime +7 -delete',h1:'只留最近 7 份',h2:'find 按时间筛选',h3:'find /backup -name "etc-*.tar.gz" -mtime +7 -delete',why:'-mtime +7 是“修改时间超过 7 天”；只对匹配的文件生效，避免误删别的备份。'}},
+    run:{acc:['find','-mtime','delete'],ans:'find /backup -name "etc-*.tar.gz" -mtime +7 -delete',h1:'只留最近 7 份',h2:'find 按时间筛选',h3:'find /backup -name "etc-*.tar.gz" -mtime +7 -delete',why:'-mtime +7 会按完整 24 小时向下取整，实际匹配 8 天及以上；只对匹配的文件生效，避免误删别的备份。'}},
    {k:'验',h:'最后一道',b:'回答下面的题。'}
   ],
   accept:{q:'一套备份方案必须包含：生成、校验、保留、告警四件事。',a:true,hint:'少一件会怎样？',why:'少校验等于赌运气，少保留会撑满磁盘，少告警则失败无人知。四件事合起来才叫方案。'}}
@@ -12997,16 +13089,38 @@ function renderCampNav(sub){
     }).join('');
     return `<div class="st">阶段 ${st.no} · ${st.name}</div>${rows}`;
   }).join('');
+  requestAnimationFrame(()=>{
+    const nav=$('campNav'), on=nav&&nav.querySelector('button.on');
+    if(!nav||!on) return;
+    if(window.matchMedia('(max-width:900px)').matches){
+      nav.scrollLeft=Math.max(0,on.offsetLeft-(nav.clientWidth-on.offsetWidth)/2);
+      return;
+    }
+    const nr=nav.getBoundingClientRect(), br=on.getBoundingClientRect();
+    if(br.top<nr.top+4) nav.scrollTop+=br.top-nr.top-8;
+    else if(br.bottom>nr.bottom-4) nav.scrollTop+=br.bottom-nr.bottom+8;
+  });
 }
 
+let CAMP_LAST_W=0;
 function renderCamp(sub){
   const subStr=String(sub||'');
   const w=Math.max(1,Math.min(24,parseInt(subStr||CAMP.cur||1)));
+  const prevW=CAMP_LAST_W;
+  CAMP_LAST_W=w;
   CAMP.cur=w; saveCamp();
   if(!(CAMP.days||{})[todayKey()]){ campTouch(); }
   campNormalize();
   renderCampTop(); renderCampToday(); renderCampWeak(); renderCampNav(String(w));
   if(!CAMP_LESSONS[w]) renderCampLocked(w); else renderCampLesson(w);
+  if(prevW&&prevW!==w&&window.matchMedia('(max-width:900px)').matches){
+    setTimeout(()=>{
+      const main=$('campMain');
+      if(!main) return;
+      const top=window.scrollY+main.getBoundingClientRect().top-62;
+      window.scrollTo({top:Math.max(0,top),behavior:'auto'});
+    },80);
+  }
 }
 
 function renderCampLocked(w){
@@ -13113,24 +13227,55 @@ function capDownload(kind){
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(()=>URL.revokeObjectURL(url),1200);
 }
+function capSubmitW8(){
+  const v={phenomenon:($('w8_phenomenon')||{}).value||'',evidence:($('w8_evidence')||{}).value||'',root:($('w8_root')||{}).value||'',action:($('w8_action')||{}).value||'',verify:($('w8_verify')||{}).value||''};
+  const e={phenomenon:v.phenomenon.trim(),evidence:v.evidence.trim(),root:v.root.trim(),action:v.action.trim(),verify:v.verify.trim()};
+  if(!w8EvidenceDraftComplete(e)){ toast('五段证据太短：每段都要写成可核对的一句事实'); return; }
+  DB.w8Evidence=e;
+  DB.w8SubmittedAt=Date.now(); saveDB(); campNormalize(); campSyncLv(8);
+  const res=$('w8Res'); if(res){ res.style.color='var(--green)'; res.textContent='已提交 '+new Date(DB.w8SubmittedAt).toLocaleString('zh-CN'); }
+  const btn=$('w8Btn'); if(btn) btn.textContent='更新 W8 工单证据';
+  toast('W8 五段证据已记录；再完成结构化复盘、l30 6/6、实验和故障挑战才判 L4');
+}
+function capSubmitW8Review(){
+  const r={why1:($('w8_why1')||{}).value||'',why2:($('w8_why2')||{}).value||'',why3:($('w8_why3')||{}).value||'',why4:($('w8_why4')||{}).value||'',why5:($('w8_why5')||{}).value||'',monitor:($('w8_monitor')||{}).value||'',process:($('w8_process')||{}).value||'',owner:($('w8_owner')||{}).value||'',deadline:($('w8_deadline')||{}).value||'',acceptance:($('w8_acceptance')||{}).value||''};
+  const v={}; Object.keys(r).forEach(k=>v[k]=String(r[k]).trim());
+  if(!w8ReviewDraftComplete(v)){ toast('复盘未通过：5 Why 要问到监控/流程，两条 Action 不能相同，owner/截止/验收都要填'); return; }
+  DB.w8Review=v;
+  DB.w8ReviewSubmittedAt=Date.now(); saveDB(); campNormalize(); campSyncLv(8);
+  const res=$('w8RevRes'); if(res){ res.style.color='var(--green)'; res.textContent='已提交 '+new Date(DB.w8ReviewSubmittedAt).toLocaleString('zh-CN'); }
+  const btn=$('w8RevBtn'); if(btn) btn.textContent='更新 W8 复盘';
+  toast('W8 复盘已记录；W8 判 L4 仍需 l30 6/6、实验和故障挑战');
+}
 function campFinalHTML(){
+ const finalOk=!!(DB.finalPassed && typeof DB.finalScore==='number' && DB.finalScore>=80);
+ const blindOk=!!(DB.labBlindDone&&DB.labBlindDone['lab-final']);
+ const scoreTxt=DB.finalScore!=null?(DB.finalScore+'%'):'尚未作答';
  return `<div class="camp-sec">
   <div class="camp-sec-h"><span class="n">11</span><h3>W24 全程结业：20 题笔试 + 盲排实战</h3></div>
-  <p style="font-size:12.8px;color:var(--txt-2);line-height:1.85">W24 全程结业 = 这 20 题笔试 + W24 盲排实战；笔试 45 分钟，范围限定在网络、Linux、抓包、服务、安全、数据库、监控与综合案例，不考纯名词。低于 80% 回到薄弱单元重做，再进盲排。</p>
+  <p style="font-size:12.8px;color:var(--txt-2);line-height:1.85">W24 全程结业 = 这 20 题笔试 + W24 盲排实战；两样都过才判 L4，少一样就停在 L3。笔试 45 分钟，范围限定在网络、Linux、抓包、服务、安全、数据库、监控与综合案例，不考纯名词；低于 80% 回到薄弱单元重做，再进盲排。</p>
   <div class="camp-fault" style="background:#12151a;border-color:var(--line)">
    <ul class="camp-plist">
     <li><b>范围：</b>排除纯术语题，优先实操判断与命令选择</li>
     <li><b>及格线：</b>≥ 80%，即至少 16/20；错题自动进错题本</li>
-    <li><b>用法：</b>先做一次，再按错题定位到单元，不要背答案</li>
+    <li><b>硬门禁：</b>笔试 ≥80% 且 W24 盲排通过；只做实验不判 L4</li>
    </ul>
    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px">
-    <button class="btn sm primary" onclick="startExam(20,45,FINAL_POOL)">开始 W24 笔试（20 题）</button>
+    <button class="btn sm primary" onclick="startExam(20,45,FINAL_POOL,'final')">开始 W24 笔试（20 题）</button>
     <button class="btn sm ghost" onclick="goLab(&quot;lab-final&quot;)">进入 W24 盲排实战</button>
-    <span style="font-size:12.2px;color:var(--txt-3)">${DB.finalScore!=null?'上次正确率 '+DB.finalScore+'%':'尚未作答'}</span>
+    <span style="font-size:12.2px;color:${finalOk?'var(--green)':'var(--txt-3)'}">笔试：${scoreTxt}${finalOk?' · 已通过':' · 未通过'}</span>
    </div>
+   <p style="font-size:12.2px;color:var(--txt-3);margin-top:9px;margin-bottom:0">盲排实战：<b style="color:${blindOk?'var(--green)':'var(--txt-3)'}">${blindOk?'已通过（全程盲排）':'未通过 / 未完成'}</b>　两项都过，W24 才判 L4；笔试通过后仍可再练，成绩不会因重做而失效。</p>
   </div></div>`;
 }
 function campCapstoneHTML(){
+  const w8=DB.w8Evidence||{};
+  const rv=DB.w8Review||{};
+  const w8ok=!!(DB.w8SubmittedAt&&w8EvidenceComplete());
+  const rvok=!!(DB.w8ReviewSubmittedAt&&w8ReviewComplete());
+  const l30ok=lessonPerfect('l30');
+  const w8time=DB.w8SubmittedAt?new Date(DB.w8SubmittedAt).toLocaleString('zh-CN'):'';
+  const rvtime=DB.w8ReviewSubmittedAt?new Date(DB.w8ReviewSubmittedAt).toLocaleString('zh-CN'):'';
   return `<div class="camp-sec">
    <div class="camp-sec-h"><span class="n">12</span><h3>W8 主线验收包：工单 + 复盘 + 6 题</h3></div>
    <p style="font-size:12.8px;color:var(--txt-2);line-height:1.85">8 周主线验收不是“看完 8 周”，是交得出 2 份东西 + 1 次自测：一份工单、一份复盘、验收课 l30 六题全对。W24 盲排是全程结业，不在 W8 验收内。模板不是抄，先填事实，再删掉不适用的行。</p>
@@ -13139,11 +13284,46 @@ function campCapstoneHTML(){
      <li><b>工单：</b>8 个字段齐全，现象原文、证据行、根因、最小动作、可复现验证</li>
      <li><b>复盘：</b>5 Why 到监控/流程层，至少 1 个监控 + 1 个流程 Action，带 owner/截止/验收</li>
      <li><b>自测：</b>l30 工单与复盘课 6 题全对，错题回到对应小节重看</li>
+     <li><b>硬门禁：</b>五段证据提交 + 结构化复盘 + l30 6/6 + 实验 + 故障挑战；只下模板不判 L4</li>
     </ul>
     <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:12px">
      <button class="btn sm primary" onclick="capDownload('ticket')">下载工单模板 .md</button>
      <button class="btn sm ghost" onclick="capDownload('review')">下载复盘模板 .md</button>
      <button class="btn sm ghost" onclick="cmdGoLesson('l30')">打开验收课 l30</button>
+    </div>
+    <div class="w8-form">
+     <p style="font-size:12.4px;color:var(--txt-2);line-height:1.7;margin:0 0 7px"><b>五段证据（必填）</b>　不写空话；每一段至少一句可核对的事实。提交后才计入 W8 硬门禁。</p>
+     <div class="fx-grid" style="grid-template-columns:1fr;gap:9px">
+      <label>① 现象<textarea id="w8_phenomenon" class="w8-ta" placeholder="用户/监控看到什么，原文怎么写">${esc(w8.phenomenon||'')}</textarea></label>
+      <label>② 证据<textarea id="w8_evidence" class="w8-ta" placeholder="命令输出里的数字、路径或报错原文">${esc(w8.evidence||'')}</textarea></label>
+      <label>③ 根因<textarea id="w8_root" class="w8-ta" placeholder="机制层原因，不是“服务挂了”">${esc(w8.root||'')}</textarea></label>
+      <label>④ 动作<textarea id="w8_action" class="w8-ta" placeholder="动作 + 对象 + 参数；不用高风险一键修复">${esc(w8.action||'')}</textarea></label>
+      <label>⑤ 验证<textarea id="w8_verify" class="w8-ta" placeholder="怎么证明真的修好了">${esc(w8.verify||'')}</textarea></label>
+     </div>
+     <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:9px">
+      <button class="btn sm primary" id="w8Btn" onclick="capSubmitW8()">${w8ok?'更新 W8 工单证据':'提交 W8 工单证据'}</button>
+      <span id="w8Res" style="font-size:12px;color:${w8ok?'var(--green)':'var(--txt-3)'}">${w8ok?'已提交 '+esc(w8time):'未提交，W8 硬门禁未通过'}</span>
+     </div>
+    </div>
+    <div class="w8-form">
+     <p style="font-size:12.4px;color:var(--txt-2);line-height:1.7;margin:0 0 7px"><b>结构化复盘（必填）</b>　5 Why 必须问到监控/流程层；监控 Action 与流程 Action 不能是同一句；owner、截止、验收缺一不可。</p>
+     <div class="fx-grid" style="grid-template-columns:1fr;gap:9px">
+      <label>Why 1：现象为什么发生？<input id="w8_why1" class="w8-in" value="${esc(rv.why1||'')}" placeholder="例如：8080 没有监听"></label>
+      <label>Why 2：上一层原因为什么出现？<input id="w8_why2" class="w8-in" value="${esc(rv.why2||'')}" placeholder="例如：app 启动失败"></label>
+      <label>Why 3：再上一层为什么出现？<input id="w8_why3" class="w8-in" value="${esc(rv.why3||'')}" placeholder="例如：配置项 X 缺失"></label>
+      <label>Why 4：为什么没有提前发现？<input id="w8_why4" class="w8-in" value="${esc(rv.why4||'')}" placeholder="例如：变更模板漏了该项"></label>
+      <label>Why 5：为什么监控/流程没拦住？<input id="w8_why5" class="w8-in" value="${esc(rv.why5||'')}" placeholder="必须落到监控、告警、发布或巡检流程"></label>
+      <label>监控 Action（补什么指标/告警）<input id="w8_monitor" class="w8-in" value="${esc(rv.monitor||'')}" placeholder="例如：补 8080 监听告警"></label>
+      <label>流程 Action（改哪条发布/巡检规则）<input id="w8_process" class="w8-in" value="${esc(rv.process||'')}" placeholder="例如：配置模板加必填校验"></label>
+      <label>Owner<input id="w8_owner" class="w8-in" value="${esc(rv.owner||'')}" placeholder="具体人或角色"></label>
+      <label>截止<input type="date" id="w8_deadline" class="w8-in" value="${esc(rv.deadline||'')}"></label>
+      <label>验收方式<input id="w8_acceptance" class="w8-in" value="${esc(rv.acceptance||'')}" placeholder="怎么验证这条 Action 真生效"></label>
+     </div>
+     <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:9px">
+      <button class="btn sm primary" id="w8RevBtn" onclick="capSubmitW8Review()">${rvok?'更新 W8 复盘':'提交 W8 复盘'}</button>
+      <span id="w8RevRes" style="font-size:12px;color:${rvok?'var(--green)':'var(--txt-3)'}">${rvok?'已提交 '+esc(rvtime):'未提交，W8 硬门禁未通过'}</span>
+     </div>
+     <p style="font-size:12.1px;color:var(--txt-3);margin:8px 0 0">l30 验收：<b style="color:${l30ok?'var(--green)':'var(--txt-2)'}">${l30ok?'已 6/6（独立记录）':'未完成（营内 5 题不计）'}</b>　W8 判 L4 需要：五段证据 + 结构化复盘 + l30 6/6 + 实验 + 故障挑战。</p>
     </div>
     <p style="font-size:12.2px;color:var(--txt-3);margin-top:9px;margin-bottom:0">验收线：工单能让人按证据复现；复盘能让人说清下次怎么更快发现。两样都拿不出来，就不算走完主线。</p>
    </div></div>`;
@@ -13153,7 +13333,6 @@ function renderCampLesson(w){
   const L=CAMP_LESSONS[w], W=campW(w), lv=campLevel(w);
   const needLab=!L.noLab && labDoneFor(w,L.lab.id);
   if(needLab&&!W.lab){ W.lab=1; saveCamp(); }
-  if((W.quiz>0||needLab)&&!W.read){ W.read=1; saveCamp(); }
   const lvNow=campLevel(w);
   const fig=CAMPFIG[L.diagram.k]?`<div class="kp-fig">${CAMPFIG[L.diagram.k]()}<figcaption>${L.diagram.cap}</figcaption></div>`:'';
   const stage=CAMP_STAGES.find(s=>s.weeks.includes(w));
@@ -13258,8 +13437,8 @@ function renderCampLesson(w){
    ${kpChips(kpOfWeek(w),{weeks:[w]})}
    <div class="camp-foot">
     <span class="lv-badge l${lvNow}" id="campLvFoot">当前 ${campLvName(lvNow)}</span>
-    <span style="font-size:12.4px;color:var(--txt-3)">L1 读完目标/专题课 · L2 考核≥80% · L3 实验全通过 · L4 故障挑战通过</span>
-    <button class="btn ${W.read?'ghost':'primary'}" style="margin-left:auto" onclick="campMarkRead(${w})">${W.read?'已读目标（点击取消）':'标记读完目标 L1'}</button>
+    <span style="font-size:12.4px;color:var(--txt-3)">L1 关联专题课全完成 · L2 考核≥80% · L3 实验通过 · L4 故障通过 · W8/W24 另有硬验收</span>
+    ${L.lesson&&L.lesson.length?`<button class="btn ghost" style="margin-left:auto" onclick="cmdGoLesson('${L.lesson[0]}')">去完成关联专题课</button>`:''}
     ${w<4?`<button class="btn ghost" onclick="location.hash='#/camp/${w+1}'">下一周</button>`:`<button class="btn ghost" onclick="location.hash='#/camp/5'">进入单元 5</button>`}
    </div></article>`;
   if(CAMP_TASK_ONLY){
@@ -13285,7 +13464,7 @@ function renderCampLesson(w){
   }
 }
 function campMarkRead(w){
-  const W=campW(w); W.read=W.read?0:1; if(W.read){ W.ts=Date.now(); campTouch(); } saveCamp(); renderCamp(String(w));
+  toast('进度由专题课 6/6 自动同步，不再手动标记');
 }
 function campSyncLv(w){
   const lv=campLevel(w), nm=campLvName(lv);
@@ -13388,7 +13567,7 @@ function campSubmitFault(w){
   if(s>=80&&hard){
     W.fault=1; W.ts=Date.now(); campTouch(); saveCamp();
     $('cfRes').innerHTML='<span style="color:var(--green)">通过 '+s+'/100｜'+cmdEsc(rows.join(' · '))+'｜参考答案：'+cmdEsc(L.fault.answer)+'</span>';
-    campSyncLv(w); toast('故障挑战通过，本单元达到 L4');
+    campSyncLv(w); toast('故障挑战通过，本单元当前 '+campLvName(campLevel(w)));
   }else{
     const miss=[];
     if(!hasCmd) miss.push('② 必须是“命令 + 参数”，不能只写“检查一下”');
@@ -13422,8 +13601,12 @@ function campSubmitQuiz(w){
   const W=campW(w);
   if(pct>=(W.quiz||0)){ W.quiz=pct; }
   if(pct>=80&&W.quiz>=80){ W.ts=Date.now(); campTouch(); }
+  let sync='';
+  if(pct===100&&w===7) sync='；W7 营内 5 题不回写课程，l29 需在课程页完成 6/6';
+  if(pct===100&&w===8) sync='；W8 营内 5 题不回写课程，l30 需在课程页完成 6/6';
   saveCamp();
-  $('cqRes').textContent='本次 '+right+'/'+L.quiz.length+'（'+pct+'%），最高 '+W.quiz+'%'+(pct>=80?'　已达 L2':'　需 ≥80%');
+  campNormalize();
+  $('cqRes').textContent='本次 '+right+'/'+L.quiz.length+'（'+pct+'%），最高 '+W.quiz+'%'+(pct>=80?'　已达 L2':'　需 ≥80%')+sync;
   $('cqExp').innerHTML=exp.join('');
   campSyncLv(w);
 }
@@ -13431,12 +13614,13 @@ function campSubmitQuiz(w){
 
 // ==================== 首页渲染 ====================
 function renderHome(){
+  campNormalize();
   const total=QUESTIONS.length;
   const done=Object.keys(DB.rec).length;
   const right=Object.values(DB.rec).filter(r=>r.ok).length;
   const rate=done?Math.round(right/done*100):0;
   $('heroStats').innerHTML =
-    hstat(campDoneCount()+'/8','主线已学单元')+hstat(campStreak()+' 天','连续学习')+hstat(DB.wrong.length,'待复习')+hstat(total,'题库总量');
+    hstat(campDoneCount()+'/8','主线已学单元')+hstat(campStreak()+' 天','连续学习')+hstat(DB.wrong.length,'待复习')+hstat(LESSONS.length,'专题课');
   const hq=QUESTIONS.filter(isHandsOnQ).length;
   const setTxt=(id,t)=>{const el=$(id); if(el)el.textContent=t;};
   setTxt('homeQCount',`${total} 题：实操 ${hq}，选择/判断 ${total-hq}`);
@@ -13463,7 +13647,7 @@ function renderHome(){
       nx.innerHTML='<b>主线 8 周已完成。</b>下一扩展单元：第 '+nextW+' 周 · '+(n?n.text:'内容待开发')+'　<span style="color:var(--txt-3)">（扩展单元教材/跟练补齐中，不计入主线验收）</span>';
     } else {
       const n=campNext(nextW);
-      nx.innerHTML='下一任务：<b>第 '+nextW+' 周</b> · '+(n?n.text:'本单元已完成')+'　<span style="color:var(--txt-3)">（当前 '+campLvName(campLevel(nextW))+'；8 周主线完成后做一轮错题复盘）</span>';
+      nx.innerHTML='下一任务：<b>第 '+nextW+' 周</b> · '+(n?n.text:'本单元已完成');
     }
   }
 }
@@ -13584,8 +13768,13 @@ function lqSubmit(id){
     }
   });
   const s=$('lqScore-'+id);
-  if(right===l.quiz.length && !DB.lessonDone.includes(id)){
-    DB.lessonDone.push(id); saveDB(); toast('6/6，已记录本课完成');
+  if(right===l.quiz.length){
+    if(!DB.lessonQuiz) DB.lessonQuiz={};
+    DB.lessonQuiz[id]={right,total:l.quiz.length,ts:Date.now()};
+    if(!DB.lessonDone.includes(id)) DB.lessonDone.push(id);
+    saveDB();
+    campNormalize();
+    toast('6/6，已记录本课完成');
   }
   if(s) s.textContent=`本次 ${right}/${l.quiz.length}。`+(right===l.quiz.length?'全对，已记录本课完成。':'没到全对，不算过；回到对应命令卡和实验重做一遍。');
 }
@@ -13618,6 +13807,7 @@ function lessonCardHTML(l){
   </button>`;
 }
 function renderCourse(){
+  campNormalize();
   CUR_LESSON='';
   const list=$('courseList'),det=$('lessonDetail');
   const hero=document.querySelector('#view-course .hero'); if(hero)hero.style.display='';
@@ -13630,8 +13820,6 @@ function renderCourse(){
   const resume=resumeId?LESSONS_MAP[resumeId]:null;
   list.innerHTML=`<div class="track-overview">
     <div class="track-copy">
-      <span class="track-kicker">CAREER TRACK · 6 阶段 / ${total} 课</span>
-      <h2>从 0 到独立值班，按顺序走</h2>
       <p>这不是刷题清单。每一课都从一张工单开始，先把现象和用途看清，再学判断与命令，最后进实验、做 6 题闭卷验收。阶段内不跳课，阶段末再进下一段。</p>
       <div class="track-actions">
         ${resume?`<button class="btn primary sm" id="trackResume">继续第 ${String(LESSON_INDEX[resumeId]).padStart(2,'0')} 课：${resume.title}</button><button class="btn ghost sm" id="trackStart">从第 01 课开始</button>`:'<button class="btn primary sm" id="trackStart">从第 01 课开始</button>'}
@@ -13685,12 +13873,13 @@ function renderLesson(l){
     deliver:l.deliver||'一份可复现的命令记录。'
   };
   const where=(l.where&&l.where.length?l.where:['本课工单']).map(x=>`<span class="where-chip">${x}</span>`).join('');
-  let html=`<div class="lesson-wrap">
+  let html=`<div class="lesson-wrap lw-collapsed">
     <div class="lw-top"><button class="lw-back" id="lwBack">← 返回课程主线</button><span class="lw-pos">第 ${idx} / ${LESSON_ORDER.length} 课 · 阶段 ${stage.no} ${stage.name}</span></div>
     <div class="lw-title">
       <h1>${l.title}</h1>
       <div class="lw-meta"><span class="mini-tag">建议 ${l.mins} 分钟</span><span class="mini-tag">工单驱动</span><span class="mini-tag">${l.quiz?l.quiz.length:6} 题验收</span></div>
     </div>
+    <button class="btn ghost sm lw-expand" id="lwExpand" aria-expanded="false">展开全文：原理 / 步骤 / 命令 / 验收</button>
     <div class="lw-case">
       <div class="case-kicker"><span class="case-id">CASE ${idx}</span><span>现场工单 · 先看用途再动手</span></div>
       <h2>${c.caseTitle}</h2>
@@ -13701,7 +13890,8 @@ function renderLesson(l){
         <div class="case-cell"><b>交付</b><p>${c.deliver}</p></div>
       </div>
     </div>
-    <div class="lw-where"><span class="where-label">会用在</span>${where}</div>`;
+    <div class="lw-where"><span class="where-label">会用在</span>${where}</div>
+    <div class="lw-body" id="lwBody">`;
   html+=sec('先判断：为什么会这样',`<div class="lead-note">${l.why}</div><ul>${l.points.map(p=>`<li>${p}</li>`).join('')}</ul>`);
   if(l.diagram && DIAGRAMS[l.diagram]){
     html+=sec('图解',`<div class="diagram-box" id="diagramHost">${DIAGRAMS[l.diagram]()}</div>`);
@@ -13726,10 +13916,11 @@ function renderLesson(l){
   html+=sec('回到工单：现场处置与验收',`<div class="note-box scene">${l.scene}</div>${l.verify?`<div class="practice-box"><p>${l.verify}</p></div>`:''}`);
   const LK=LESSON_LINKS[l.id]||{};
   const labObj=LK.lab?LABS.find(x=>x.id===LK.lab):null;
+  const labBrd=labObj?labForWeek(labObj,LK.camp||0):null;
   if(labObj){
-    html+=sec('先动手：去实验台跑一遍',`<div class="lab-bridge"><div><b>${labObj.title}</b><p>同一知识点，先在模拟终端完成故障注入、取证和验收；再回来做题。</p></div><button class="btn primary sm" id="lwLab">打开实验</button></div>`);
+    html+=sec('先动手：去实验台跑一遍',`<div class="lab-bridge"><div><b>${labBrd.title}</b><p>同一知识点，先在模拟终端完成故障注入、取证和验收；再回来做题。</p></div><button class="btn primary sm" id="lwLab">打开实验</button></div>`);
   }
-  html+=sec(`工单验收：闭卷 ${l.quiz?l.quiz.length:6} 题`, l.quiz&&l.quiz.length? lqHTML(l) : `<div class="practice-box"><p>完成本课关联练习，答错自动进错题本。</p><button class="btn primary sm" id="lwPractice">开始练习</button><button class="btn sm ghost" id="lwDone">标记学完</button></div>`);
+  html+=sec(`工单验收：闭卷 ${l.quiz?l.quiz.length:6} 题`, l.quiz&&l.quiz.length? lqHTML(l) : `<div class="practice-box"><p>本课暂无闭卷题库，不能计入课程完成；先做关联练习。</p><button class="btn primary sm" id="lwPractice">开始练习</button></div>`);
   const oi=LESSON_ORDER.indexOf(l.id), prev=oi>0?LESSONS_MAP[LESSON_ORDER[oi-1]]:null, next=oi>=0&&oi<LESSON_ORDER.length-1?LESSONS_MAP[LESSON_ORDER[oi+1]]:null;
   html+=sec('下一步：把这条线接上',`<div class="lw-next">${prev?`<button class="btn sm ghost" onclick="openLesson('${prev.id}')">← 上一课：${prev.title}</button>`:'<span></span>'}${next?`<button class="btn primary sm" onclick="openLesson('${next.id}')">下一课：${next.title} →</button>`:'<button class="btn sm ghost" onclick="renderCourse()">回到课程主线</button>'}</div>
     <div class="link-acts" style="margin-top:12px">
@@ -13737,21 +13928,24 @@ function renderLesson(l){
       ${LK.camp?`<button class="btn sm ghost" id="lwCamp">对应训练营单元 ${LK.camp}</button>`:''}
       ${LK.field?`<button class="btn sm ghost" id="lwField">看实战手册</button>`:''}
     </div>`);
+  html+='</div>';
   return html+'</div>';
 }
 
 function bindLesson(l){
   $('lwBack').onclick=()=>renderCourse();
-  const d=$('lwDone');
-  if(d) d.onclick=()=>{
-    if(!DB.lessonDone.includes(l.id))DB.lessonDone.push(l.id);
-    saveDB();toast('已记录课程完成');renderCourse();
+  const ex=$('lwExpand');
+  if(ex) ex.onclick=()=>{
+    const wrap=ex.closest('.lesson-wrap');
+    const collapsed=wrap.classList.toggle('lw-collapsed');
+    ex.textContent=collapsed?'展开全文：原理 / 步骤 / 命令 / 验收':'收起全文';
+    ex.setAttribute('aria-expanded',collapsed?'false':'true');
   };
   const p=$('lwPractice');
   if(p) p.onclick=()=>startQuiz('lesson',l.practice.slice());
   const LK=LESSON_LINKS[l.id]||{};
   const lb=$('lwLab');
-  if(lb)lb.onclick=()=>{ if(LK.lab){ showView('lab'); openLab(LK.lab); } };
+  if(lb)lb.onclick=()=>{ if(LK.lab){ showView('lab'); LAB_CTX=LK.camp?('l'+String(LK.camp).padStart(2,'0')):null; LAB_FRESH=false; openLab(LK.lab); } };
   const kb=$('lwKp');
   if(kb)kb.onclick=()=>{
     location.hash='#/wiki';
@@ -14205,7 +14399,7 @@ const LABS=[
   {d:'进入 Nginx 配置目录 /etc/nginx',e:'cd /etc/nginx',ck:s=>s.cwd==='/etc/nginx'},
   {d:'查看 nginx.conf 的内容',e:'cat nginx.conf',need:[2],ck:s=>s.flags.catConf}
  ]},
-{id:'lab-perm',title:'实验二：修权限，让脚本能跑起来',mins:12,goal:'部署脚本 deploy.sh 双击报 Permission denied，用权限手段解决，并理解目录 x 位。',
+{id:'lab-perm',title:'W02：修权限，让脚本能跑起来',mins:12,goal:'部署脚本 deploy.sh 双击报 Permission denied，用权限手段解决，并理解目录 x 位。',
  tasks:[
   {d:'用长格式查看 deploy.sh 的权限',e:'ls -l deploy.sh',ck:s=>s.flags.lsL},
   {d:'给 deploy.sh 加上执行权限（保持 755 不变的其他位）',e:'chmod +x deploy.sh',ck:s=>hasX(s,'/home/ops/deploy.sh')},
@@ -14217,7 +14411,7 @@ const LABS=[
   {d:'给 /data 放行穿越（只加 other 的 x，不要动 r 和 w）',e:'chmod o+x /data',need:[5],
    ck:s=>{const n=nodeAt(s,'/data');return !!(n&&(+n.perm[2]&1))||!!(n&&n.acl&&n.acl.u&&n.acl.u.alice!=null)}}
  ]},
-{id:'lab-svc',title:'实验三：Nginx 起不来，排障到修好',mins:18,goal:'服务处于 failed 状态，配置文件里有一处拼写错误。先取证定位、再改配置、最后验证端口与自启——直接 restart 会继续失败。',
+{id:'lab-svc',title:'W03：Nginx 起不来，排障到修好',mins:18,goal:'服务处于 failed 状态，配置文件里有一处拼写错误。先取证定位、再改配置、最后验证端口与自启——直接 restart 会继续失败。',
  tasks:[
   {d:'查看 nginx 服务当前状态，确认失败发生在哪一步',e:'systemctl status nginx',ck:s=>s.flags.stNginx},
   {d:'用配置检查找出报错和行号',e:'nginx -t',need:[0],ck:s=>!!s.flags.ngxTest},
@@ -14275,7 +14469,7 @@ const LABS=[
   {d:'模拟 DHCP 拿不到地址，记录 DISCOVER 无响应',e:'dhclient -v eth0',ck:s=>s.flags.dhcpFail},
   {d:'复查地址，确认是否出现 169.254 自分配地址',e:'ip addr',ck:s=>s.flags.ipA}
  ]},
- {id:'lab-sec',title:'实验二十：sudo、SSH、SELinux，安全边界四层',mins:18,goal:'“端口开了、服务通了”不等于安全。按 sudo 授权、SSH 运行时策略、防火墙默认策略、SELinux 上下文四层取证，每层都要有可复查输出。',
+ {id:'lab-sec',title:'W18：sudo、SSH、SELinux，安全边界四层',mins:18,goal:'“端口开了、服务通了”不等于安全。按 sudo 授权、SSH 运行时策略、防火墙默认策略、SELinux 上下文四层取证，每层都要有可复查输出。',
  tasks:[
   {d:'列出当前用户能执行哪些 sudo 命令，找出 ALL 或 NOPASSWD',e:'sudo -l',ck:s=>s.flags.sudoL},
   {d:'读取 sshd 运行时策略，确认 root 与密码登录',e:'sshd -T',ck:s=>s.flags.sshdT},
@@ -14291,7 +14485,7 @@ const LABS=[
   {d:'ping 网关 10.0.0.1，确认三层可达',e:'ping -c 2 10.0.0.1',need:[0,1],ck:s=>s.flags.pingGw},
   {d:'用 dig 验证域名解析是否正常',e:'dig www.example.com',need:[0,1,2],ck:s=>s.flags.digHost}
  ]},
-{id:'lab-pcap',title:'实验六：抓包读包，判断谁没回',mins:14,goal:'对外服务偶发 502，后端 8080 间歇拒绝。用抓包看清握手与拒绝，再落盘做统计，所有结论都要有包支撑。',
+{id:'lab-pcap',title:'实验六A：抓包读包，判断谁没回',mins:14,goal:'对外服务偶发 502，后端 8080 间歇拒绝。用抓包看清握手与拒绝，再落盘做统计，所有结论都要有包支撑。',
  tasks:[
   {d:'抓取 80 端口的 TCP 报文（不解析域名与端口名）',e:'sudo tcpdump -i eth0 -nn port 80',ck:s=>s.flags.tcpdump80},
   {d:'只抓 RST 包，看是谁在拒绝连接',e:"sudo tcpdump -i eth0 -nn 'tcp[tcpflags] & tcp-rst != 0'",need:[0],ck:s=>s.flags.tcpRst},
@@ -14299,7 +14493,33 @@ const LABS=[
   {d:'把抓到的包落盘到 /tmp/cap.pcap（保留完整包）',e:'sudo tcpdump -i any -nn -s 0 -w /tmp/cap.pcap port 80',need:[2],ck:s=>nodeAt(s,'/tmp/cap.pcap')&&nodeAt(s,'/tmp/cap.pcap').t==='f'},
   {d:'用 tshark 统计重传帧',e:"tshark -r /tmp/cap.pcap -Y 'tcp.analysis.retransmission'",need:[3],ck:s=>s.flags.tShark},
   {d:'查看 UDP 监听端口，理解无连接协议为什么没有 SYN',e:'ss -lunp',need:[4],ck:s=>s.flags.ssUdp}
- ]},
+ ],
+ variants:{
+  13:{
+   title:'实验六B：抓包可信度与过滤',
+   goal:'同一套抓包现场，换目标：先确认抓哪块网卡，再用 -w 落盘，最后核对过滤语法、监听状态与包证据。',
+   tasks:[
+    {d:'确认到 10.0.0.9 实际走哪块网卡',e:'ip route get 10.0.0.9',ck:s=>s.flags.ipRouteGet},
+    {d:'按 80 端口抓包并落盘到 /tmp/cap13.pcap',e:'sudo tcpdump -i eth0 -nn -s0 -c 200 -w /tmp/cap13.pcap port 80',need:[0],ck:s=>s.flags.tcpW&&!!nodeAt(s,'/tmp/cap13.pcap')},
+    {d:'离线筛纯 SYN，确认客户端有没有发起连接',e:"tshark -r /tmp/cap13.pcap -Y 'tcp.flags.syn==1 && tcp.flags.ack==0'",need:[1],ck:s=>s.flags.tSharkRead},
+    {d:'离线筛重传，确认丢包方向',e:"tshark -r /tmp/cap13.pcap -Y 'tcp.analysis.retransmission'",need:[2],ck:s=>s.flags.tShark},
+    {d:'确认本机 80 端口在监听，与抓包互证',e:'ss -lntp',need:[0],ck:s=>s.flags.ss},
+    {d:'只抓 RST 包，看拒绝来自端口没监听还是策略 reject',e:"tcpdump -i eth0 -nn 'tcp[tcpflags] & tcp-rst != 0'",need:[4],ck:s=>s.flags.tcpRst}
+   ]
+  },
+  14:{
+   title:'实验六C：TCP 深度判读',
+   goal:'同一套抓包现场，按 Seq/Ack、RST 时机、零窗口与 CLOSE_WAIT 四类证据判责；不是只数重传次数。',
+   tasks:[
+    {d:'按 80 端口抓包并落盘到 /tmp/cap14.pcap',e:'sudo tcpdump -i eth0 -nn -s0 -w /tmp/cap14.pcap port 80',ck:s=>s.flags.tcpW&&!!nodeAt(s,'/tmp/cap14.pcap')},
+    {d:'筛重传并输出 tcp.seq_raw，确认是否同一段反复出现',e:"tshark -r /tmp/cap14.pcap -Y 'tcp.analysis.retransmission' -T fields -e tcp.seq_raw",need:[0],ck:s=>s.flags.tShark},
+    {d:'筛零窗口，判断接收端是不是读不动',e:"tshark -r /tmp/cap14.pcap -Y 'tcp.analysis.zero_window'",need:[1],ck:s=>s.flags.tSharkZero},
+    {d:'筛 RST，按出现时机判断握手拒绝还是传输中断',e:"tshark -r /tmp/cap14.pcap -Y 'tcp.flags.reset==1'",need:[1],ck:s=>s.flags.tSharkRst},
+    {d:'看 CLOSE_WAIT 堆积，确认应用侧没有 close',e:'ss -tan state close-wait',need:[0],ck:s=>s.flags.ssCloseWait}
+   ]
+  }
+ }
+},
 {id:'lab-disk',title:'实验七：磁盘还有空间，却写不进去',mins:14,goal:'/var 使用率 92%，同时 inode 接近耗尽。按“看块→看 inode→找大目录→清归档”的顺序定位，别一上来就 rm -rf。',
  tasks:[
   {d:'列出块设备与挂载点，确认 /var 在哪块盘上',e:'lsblk',ck:s=>s.flags.lsblk},
@@ -14447,7 +14667,7 @@ const LAB_META={
  'lab-backup':{w:8,name:'打包、验证、留档'},
  'lab-net':{w:9,name:'网络四步诊断'},
  'lab-route':{w:10,name:'交换与路由，先证明路径再抓包'},
- 'lab-pcap':{w:11,weeks:[11,13,14],name:'抓包读包，判断谁没回'},
+ 'lab-pcap':{w:11,weeks:[11,13,14],name:'实验六A：抓包读包，判断谁没回',names:{11:'实验六A：抓包读包，判断谁没回',13:'实验六B：抓包可信度与过滤',14:'实验六C：TCP 深度判读'}},
  'lab-http':{w:12,name:'DNS→TCP→TLS→HTTP，四段计时'},
  'lab-nginx':{w:15,name:'Nginx 部署，配置生效与 HTTPS 验收'},
  'lab-triage':{w:16,name:'综合故障排查：七项取证 + 一份报告'},
@@ -14461,8 +14681,8 @@ const LAB_META={
  'lab-final':{w:24,name:'全程结业实战（盲排）：502 与磁盘告警'}
 };
 function labWeekLabel(weeks){return 'W'+weeks.map(x=>String(x).padStart(2,'0')).join('·');}
-LABS.forEach(l=>{const m=LAB_META[l.id];if(!m)return;l.w=m.w;l.weeks=m.weeks||[m.w];l.title=labWeekLabel(l.weeks)+'｜'+m.name;});
-Object.keys(CAMP_LESSONS).forEach(w=>{const c=CAMP_LESSONS[w];if(!c.lab||!LAB_META[c.lab.id])return;const m=LAB_META[c.lab.id];c.lab.name=labWeekLabel(m.weeks||[m.w])+'｜'+m.name;c.lab.w=m.w;c.lab.weeks=m.weeks||[m.w];});
+LABS.forEach(l=>{const m=LAB_META[l.id];if(!m)return;l.w=m.w;l.weeks=m.weeks||[m.w];l.title=labWeekLabel([m.w])+'｜'+((m.names&&m.names[m.w])||m.name);});
+Object.keys(CAMP_LESSONS).forEach(w=>{const c=CAMP_LESSONS[w];if(!c.lab||!LAB_META[c.lab.id])return;const m=LAB_META[c.lab.id];const nm=(m.names&&m.names[w])||m.name;c.lab.name=labWeekLabel([w])+'｜'+nm;c.lab.w=m.w;c.lab.weeks=m.weeks||[m.w];});
 
 
 function baseFS(){
@@ -15003,6 +15223,14 @@ function runCmd(st,line){
    return out(['-- No entries --'],'dim');
   }
   case 'ss':{
+   const joinArgs=args.join(' ');
+   if(/close[ _-]?wait/i.test(joinArgs)){
+    st.flags.ssCloseWait=1;
+    return out(['State      Recv-Q Send-Q Local Address:Port  Peer Address:Port Process',
+     'CLOSE-WAIT 0      0          10.0.0.20:8080       10.0.0.21:51234 users:(("java",pid=4120,fd=58))',
+     'CLOSE-WAIT 0      0          10.0.0.20:8080       10.0.0.21:51235 users:(("java",pid=4120,fd=59))',
+     '应用收到 FIN 但没有 close：连接挂在应用侧，先查线程池与连接池'],'dim');
+   }
    const udp=args.some(a=>/^-[^-]*u/.test(a))&&!args.some(a=>/^-[^-]*t/.test(a));
    if(udp){
     st.flags.ssUdp=1;
@@ -15207,6 +15435,18 @@ function runCmd(st,line){
    if(!f)return out(['tshark: invalid usage: tshark -r file.pcap -Y filter'],'err');
    const n=nodeAt(st,normPath(f,st.cwd));
    if(!n||n.t!=='f')return out([`tshark: ${f}: No such file or directory`],'err');
+   if(/zero[_-]?window/i.test(line)){
+    st.flags.tSharkZero=1;
+    return out(['10:22:36.501200 IP 10.0.0.21.51234 > 10.0.0.9.80: Flags [.], ack 188, win 0, length 0',
+     '10:22:38.502911 IP 10.0.0.21.51234 > 10.0.0.9.80: Flags [.], ack 188, win 0, length 0',
+     '接收窗口为 0：接收端应用读得慢，发送端暂停；先查应用线程/磁盘，不要先怪网络'],'err');
+   }
+   if(/tcp\.flags\.reset|reset\s*==\s*1/i.test(line)){
+    st.flags.tSharkRst=1;
+    return out(['10:22:41.118204 IP 10.0.0.21.51234 > 10.0.0.9.80: Flags [S], seq 3021984333, win 64240, length 0',
+     '10:22:41.118355 IP 10.0.0.9.80 > 10.0.0.21.51234: Flags [R.], seq 0, ack 3021984334, win 0, length 0',
+     'RST 紧跟 SYN：目标端口没有监听或被策略 reject；不是客户端断网'],'err');
+   }
    if(/retransmission/i.test(line)){
     st.flags.tShark=1;
     return out(['10:22:33.485301  3021984224 → 80  Retransmission  seq 1:188',
@@ -15573,6 +15813,24 @@ function runCmd(st,line){
 
 let LAB_ST=null,LAB_CTX=null,LAB_FRESH=false;
 
+// 同一个实验台按训练营周切换任务集：W11=基础，W13=抓包可信度，W14=TCP 深度判读。
+// 进度键带上周上下文，避免三周共用同一份 DB.labProg / DB.labSave 串号。
+function labWeekOf(ctx){
+ const m=/^l(\d+)$/.exec(String(ctx||''));
+ return m?+m[1]:0;
+}
+function labForWeek(lab,w){
+ const v=lab&&lab.variants&&lab.variants[w];
+ return v?Object.assign({},lab,v):lab;
+}
+function activeLab(lab){
+ return labForWeek(lab,labWeekOf(LAB_CTX));
+}
+function labStateKey(lab){
+ const w=labWeekOf(LAB_CTX);
+ return lab&&lab.variants&&lab.variants[w]?lab.id+'|'+LAB_CTX:lab.id;
+}
+
 function renderLab(){
  const list=$('labList'),det=$('labDetail');
  const hero=document.querySelector('#view-lab .hero'); if(hero)hero.style.display='';
@@ -15584,7 +15842,7 @@ function renderLab(){
      <span class="mini-tag">${l.tasks.length} 个任务</span>
      <span class="mini-tag">约 ${l.mins} 分钟</span>
      <span class="mini-tag">模拟终端</span>
-     <span class="mini-tag">可盲排</span>
+     <span class="mini-tag">${l.blind===false?'报告任务':'可盲排'}</span>
      ${(DB.labBlindDone&&DB.labBlindDone[l.id])?'<span class="done-dot">盲排通过</span>':DB.labDone.includes(l.id)?'<span class="done-dot">已通过</span>':''}
    </div></button>`).join('');
  list.querySelectorAll('.lab-card').forEach(b=>b.onclick=()=>{ LAB_CTX=null; LAB_FRESH=false; openLab(b.dataset.lab); });
@@ -15593,7 +15851,9 @@ function renderLab(){
 function labNo(l){return l.w||99;}
 LABS.sort((a,b)=>labNo(a)-labNo(b));
 function openLab(id){
- const lab=LABS.find(l=>l.id===id);if(!lab)return;
+ const base=LABS.find(l=>l.id===id);if(!base)return;
+ const lab=activeLab(base); lab._stateKey=labStateKey(lab);
+ lab._isVariant=!!(base.variants&&labWeekOf(LAB_CTX)&&base.variants[labWeekOf(LAB_CTX)]);
  CUR_LAB=id;
  const hero=document.querySelector('#view-lab .hero'); if(hero)hero.style.display='none';
  $('labList').style.display='none';
@@ -15644,6 +15904,7 @@ function openLab(id){
 }
 
 function initLab(lab){
+ const key=lab._stateKey||lab.id;
  const base={user:'ops',cwd:'/home/ops',fs:cloneFS(),flags:{},hist:[],
   init:null,
   svc:{nginx:{state:'failed',en:'disabled'},mysql:{state:'running',en:'enabled'},sshd:{state:'running',en:'enabled'}},
@@ -15651,16 +15912,16 @@ function initLab(lab){
   disk:{'/var':92,mb:18842},lines:[],done:[],finished:false,lastOut:null,lastCmd:'',blind:(lab.blind===false?false:!DB.labBlindOff),revealed:false};
  if(lab.init&&lab.init.svc) Object.assign(base.svc,lab.init.svc);
  // 完整现场恢复：目录、文件系统改动、服务状态、磁盘、命令历史
- const scene=DB.labSave&&DB.labSave[lab.id];
+ const scene=DB.labSave&&DB.labSave[key];
  if(scene&&scene.fs&&scene.svc){
-  const done=(DB.labProg&&DB.labProg[lab.id])||scene.done||[];
+  const done=(DB.labProg&&DB.labProg[key])||scene.done||[];
   return Object.assign(base,{
    cwd:scene.cwd||base.cwd,fs:scene.fs,svc:scene.svc,docker:scene.docker||base.docker,disk:scene.disk||base.disk,lastOut:scene.lastOut||null,lastCmd:scene.lastCmd||'',
    hist:scene.hist||[],done:done.slice(),
    flags:scene.flags||{},lines:scene.lines||[],
    finished:done.length===lab.tasks.length,fromSave:true});
  }
- const saved=(DB.labProg&&DB.labProg[lab.id])||[];
+ const saved=(DB.labProg&&DB.labProg[key])||[];
  base.done=saved.slice();
  base.finished=base.done.length===lab.tasks.length;
  base.fromSave=false;
@@ -15675,8 +15936,9 @@ function initLab(lab){
 
 function saveLabState(lab){
  if(!DB.labSave)DB.labSave={};
+ const key=lab._stateKey||lab.id;
  // 完整现场：目录、文件系统、服务、磁盘、历史、进度、命令标记 flags、终端输出 lines
- DB.labSave[lab.id]={cwd:LAB_ST.cwd,fs:LAB_ST.fs,svc:LAB_ST.svc,docker:LAB_ST.docker,disk:LAB_ST.disk,
+ DB.labSave[key]={cwd:LAB_ST.cwd,fs:LAB_ST.fs,svc:LAB_ST.svc,docker:LAB_ST.docker,disk:LAB_ST.disk,
   hist:LAB_ST.hist.slice(-80),done:LAB_ST.done.slice(),flags:LAB_ST.flags,lastOut:(LAB_ST.lastOut||[]).slice(-30),lastCmd:LAB_ST.lastCmd||'',
   lines:LAB_ST.lines.filter(l=>!(l.c==='dim'&&l.s.indexOf('已恢复上次的实验现场')>=0)).slice(-80)};
  saveDB();
@@ -15687,9 +15949,10 @@ function goTri(id){ location.hash='#/triage'; setTimeout(function(){ try{triageP
 function bindLab(lab){
  $('labBack').onclick=()=>renderLab();
  $('labReset').onclick=()=>{
-  if(DB.labProg)delete DB.labProg[lab.id];
-  if(DB.labSave)delete DB.labSave[lab.id];
-  DB.labDone=DB.labDone.filter(x=>x!==lab.id);
+  const key=lab._stateKey||lab.id;
+  if(DB.labProg)delete DB.labProg[key];
+  if(DB.labSave)delete DB.labSave[key];
+  if(!lab._isVariant)DB.labDone=DB.labDone.filter(x=>x!==lab.id);
   if(LAB_CTX&&DB.labWeekly)delete DB.labWeekly[LAB_CTX+'|'+lab.id];
   saveDB();
   const keepBlind=LAB_ST.blind;
@@ -15823,11 +16086,11 @@ function updTasks(lab){
   }
  });
  DB.labProg=DB.labProg||{};
- DB.labProg[lab.id]=LAB_ST.done.slice();
+ DB.labProg[lab._stateKey||lab.id]=LAB_ST.done.slice();
  if(LAB_ST.done.length===lab.tasks.length && !LAB_ST.finished){
   LAB_ST.finished=true;
-  if(!DB.labDone.includes(lab.id))DB.labDone.push(lab.id);
-  if(LAB_ST.blind&&!LAB_ST.revealed){
+  if(!lab._isVariant && !DB.labDone.includes(lab.id))DB.labDone.push(lab.id);
+  if(LAB_ST.blind&&!LAB_ST.revealed&&!lab._isVariant){
    DB.labBlindDone=DB.labBlindDone||{};
    if(!DB.labBlindDone[lab.id]) DB.labBlindDone[lab.id]=Date.now();
    LAB_ST.lines.push({s:'盲排通过：全程没有展开任务清单。',c:'ok'});
@@ -15849,7 +16112,7 @@ function paintLab(){
   return `<div class="${cls}">${esc(l.s)}</div>`;
  }).join('');
  sc.scrollTop=sc.scrollHeight;
- const lab=LABS.find(l=>l.id===curLabId());
+ const lab=activeLab(LABS.find(l=>l.id===curLabId()));
  const ps=$('labPs1');
  if(ps)ps.textContent=ps1(LAB_ST);
  const bar=document.querySelector('.term-bar span');
@@ -15893,7 +16156,7 @@ function labReveal(){
   paintLab();
 }
 function labHint(i){
-  const lab=LABS.find(l=>l.id===curLabId()); if(!lab||!lab.tasks[i]) return;
+  const lab=activeLab(LABS.find(l=>l.id===curLabId())); if(!lab||!lab.tasks[i]) return;
   const t=lab.tasks[i], k=curLabId()+'-'+i;
   const lv=(LAB_HINT[k]||0)+1; LAB_HINT[k]=lv;
   const el=document.getElementById('lh-'+k); if(!el) return;
@@ -15972,10 +16235,10 @@ function startQuiz(mode,catId,focusId){
   renderQuestion();
 }
 const FINAL_POOL=QUESTIONS.filter(q=>['net','route','voip','linux','diag','sec','fiber','db','case','cloud'].includes(q.cat)).map(q=>q.id);
-function startExam(n,minutes,poolIds){
+function startExam(n,minutes,poolIds,kind){
   const pool=poolIds||QUESTIONS.map(q=>q.id);
   const realN=Math.min(n,pool.length);
-  S.mode='exam';S.exam=true;S.examCfg={n:realN,minutes,pool:pool.slice()};
+  S.mode='exam';S.exam=true;S.examKind=kind||'mock';S.examCfg={n:realN,minutes,pool:pool.slice(),kind:S.examKind};
   S.list=shuffle(pool).slice(0,realN);
   S.idx=0;S.examAnswers={};
   S.startAt=Date.now();S.remain=minutes*60;
@@ -16314,7 +16577,11 @@ function submitExam(){
   const score=Math.round(right/total*100);
   const used=Math.round((Date.now()-S.startAt)/1000);
   S._examResult={total,right,wrong,unanswered,score,used};
-  if(S.mode==='exam'){DB.finalScore=score;saveDB();}
+  if(S.examKind==='final'){
+    if(score>=80){ DB.finalScore=score; DB.finalPassed=true; }
+    else if(!DB.finalPassed){ DB.finalScore=score; }
+    saveDB();
+  }
   // 写入做题记录与错题本
   S.list.forEach(id=>{
     const q=getQ(id),raw=S.examAnswers[id]||[],r=examJudge(q,raw);
@@ -16382,13 +16649,21 @@ function sanitizeDB(src){
     if(src.rec&&typeof src.rec==='object'&&!Array.isArray(src.rec)) out.rec=src.rec;
     if(Array.isArray(src.wrong)) out.wrong=src.wrong.filter(x=>typeof x==='string');
     if(Array.isArray(src.fav)) out.fav=src.fav.filter(x=>typeof x==='string');
-    if(Array.isArray(src.lessonDone)) out.lessonDone=src.lessonDone.filter(x=>typeof x==='string');
+    if(Array.isArray(src.lessonDone)) out.lessonDone=src.lessonDone.filter(id=>typeof id==='string'&&courseProofDone(src,id));
+    if(src.lessonQuiz&&typeof src.lessonQuiz==='object'&&!Array.isArray(src.lessonQuiz)) out.lessonQuiz=src.lessonQuiz;
     if(Array.isArray(src.labDone)) out.labDone=src.labDone.filter(x=>typeof x==='string');
     // 实验现场、实验进度、诊断模式、学习日统计都必须跟着备份回来，否则“恢复”是残缺的
     if(src.labWeekly&&typeof src.labWeekly==='object'&&!Array.isArray(src.labWeekly)) out.labWeekly=src.labWeekly;
     if(src.labSave&&typeof src.labSave==='object'&&!Array.isArray(src.labSave)) out.labSave=src.labSave;
     if(src.labProg&&typeof src.labProg==='object'&&!Array.isArray(src.labProg)) out.labProg=src.labProg;
     if(typeof src.labBlind==='boolean') out.labBlind=src.labBlind;
+    if(src.labBlindDone&&typeof src.labBlindDone==='object'&&!Array.isArray(src.labBlindDone)) out.labBlindDone=src.labBlindDone;
+    if(typeof src.finalScore==='number') out.finalScore=src.finalScore;
+    if(typeof src.finalPassed==='boolean') out.finalPassed=src.finalPassed;
+    if(src.w8Evidence&&typeof src.w8Evidence==='object'&&!Array.isArray(src.w8Evidence)) out.w8Evidence=src.w8Evidence;
+    if(typeof src.w8SubmittedAt==='number') out.w8SubmittedAt=src.w8SubmittedAt;
+    if(src.w8Review&&typeof src.w8Review==='object'&&!Array.isArray(src.w8Review)) out.w8Review=src.w8Review;
+    if(typeof src.w8ReviewSubmittedAt==='number') out.w8ReviewSubmittedAt=src.w8ReviewSubmittedAt;
     if(src.days&&typeof src.days==='object'&&!Array.isArray(src.days)) out.days=src.days;
   }
   return out;
@@ -16612,7 +16887,7 @@ $('reviewExamBtn').onclick=()=>{
   $('submitExamBtn').style.display='none';
   showView('quiz');renderQuestion();
 };
-$('againExamBtn').onclick=()=>startExam(S.examCfg.n,S.examCfg.minutes,S.examCfg.pool);
+$('againExamBtn').onclick=()=>startExam(S.examCfg.n,S.examCfg.minutes,S.examCfg.pool,S.examCfg.kind);
 $('resultHomeBtn').onclick=()=>{renderHome();showView('home');};
 $('resetBtn').onclick=()=>{
   showModal('清空学习记录','两种范围：仅清题库（答题/错题/收藏，保留训练营与实验进度）；或全部清空（连训练营周进度、实验完成、课程阅读一起清）。不可恢复。',[
