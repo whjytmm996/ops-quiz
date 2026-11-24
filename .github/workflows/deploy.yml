@@ -19,7 +19,7 @@ jobs:
         run: |
           set -euo pipefail
           if [ ! -f index.html ]; then
-            curl -fL --retry 3 --retry-delay 2 -o index.html "https://aka.doubaocdn.com/s/sVIF2RkD5C"
+            curl -fL --retry 3 --retry-delay 2 -o index.html "https://aka.doubaocdn.com/s/IMUdR1mSZu"
           fi
           echo "621daa4561ddd53162fb33980f874df484b8990a6d416fa8a4a8947d256a5a61  index.html" | sha256sum -c -
       - name: Persist imported source
