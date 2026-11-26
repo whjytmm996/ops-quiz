@@ -1,4 +1,4 @@
-name: Publish v75 to gh-pages
+name: Publish v76 to gh-pages
 on:
   push:
     branches: [main]
@@ -15,14 +15,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Verify or restore v75 single-file app
+      - name: Verify or restore v76 single-file app
         run: |
           set -euo pipefail
-          HASH='621daa4561ddd53162fb33980f874df484b8990a6d416fa8a4a8947d256a5a61'
+          HASH='28a4f478b8e7ccc4d040ceb013c0f058d3f23ead8361c8f891c0c32d5ebc9908'
           if [ -f index.html ] && echo "$HASH  index.html" | sha256sum -c - >/dev/null 2>&1; then
-            echo 'existing index.html already matches v75'
+            echo 'existing index.html already matches v76'
           else
-            curl -fL --retry 3 --retry-delay 2 -o index.html "https://aka.doubaocdn.com/s/IMUdR1mSZu"
+            curl -fL --retry 3 --retry-delay 2 -o index.html "https://aka.doubaocdn.com/s/30vRfPIykI"
           fi
           echo "$HASH  index.html" | sha256sum -c -
       - name: Persist imported source
@@ -31,7 +31,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
           if ! git diff --cached --quiet; then
-            git commit -m "chore: import v75 single-file app"
+            git commit -m "chore: import v76 single-file app"
             git push
           fi
       - name: Publish gh-pages branch
@@ -41,5 +41,5 @@ jobs:
           git checkout --orphan gh-pages
           git rm -rf --cached .
           git add -f index.html .nojekyll
-          git commit -m "deploy: v75 pages"
+          git commit -m "deploy: v76 pages"
           git push --force origin gh-pages
