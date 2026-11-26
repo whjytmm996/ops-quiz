@@ -432,6 +432,7 @@ html{scrollbar-color:var(--wash-4) transparent;scrollbar-width:thin}
 .tri-end{border-color:rgba(48,181,122,.3);background:rgba(48,181,122,.12)}
 /* ============ 浏览/搜索 ============ */
 .search-row{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.browse-note{margin:-6px 0 14px;font-size:12.5px;line-height:1.7;color:var(--txt-3)}
 .search-row input,.search-row select{
   background:var(--card-2);border:1px solid var(--line);border-radius:9px;
   color:var(--txt);padding:11px 14px;font-size:14px;min-height:44px;
@@ -2057,7 +2058,7 @@ grep ' 5[0-9][0-9] ' access.log | awk -F'[][]' '{print $2}' | cut -d: -f1-3 | so
 <!-- ===== 视图：知识点大全 ===== -->
 <section id="view-wiki" class="view">
   <div class="wiki-head">
-    <div class="hero-kicker">KNOWLEDGE BASE · 18 篇</div>
+    <div class="hero-kicker">KNOWLEDGE BASE · 19 篇</div>
     <h1>知识体系 <span class="wh-sub">按系统分层</span>，不按周赶进度</h1>
     <p>先看上面的分层地图：L00–L03 四层从开机链路排到文件与权限，每层都写清「它负责什么、坏了什么症状、用哪条命令验证」。一层看懂再往下，不用赶；要抠细节，下面还有十二篇知识专题和六篇故障长文。</p>
   </div>
@@ -2853,6 +2854,39 @@ nc -zv 10.0.0.9 8080</div>
         <div class="kp-pit"><b>坑</b><div>① 生产用 <code class="i">systemctl stop firewalld</code> 或 <code class="i">iptables -F</code> 验证完必须立刻恢复；<code class="i">iptables -F</code> 在 policy DROP 的机器上会把自己也锁在外面（SSH 断连），远程操作前先确认有带外或控制台。② firewalld 和 iptables 不要同时手改：firewalld 背后就是 nftables/iptables，手工加的规则在 <code class="i">--reload</code> 后会被覆盖。③ 容器场景还要看 docker 自己的 iptables 链（DOCKER-USER），宿主机放行了不代表容器端口放行。</div></div>
       </article>
 
+      <article class="kp" id="kp-ticket" data-k="ops">
+        <div class="kp-h"><span>13</span><h3>五步工单：现象、证据、判断、修复、验证</h3></div>
+        <p class="kp-lead">工单不是“把操作记一遍”，而是一条能被别人复现的证据链。五步的顺序不能倒：<b>先定界现象，再取证据，再做判断，再动手，最后用同一条命令验证</b>。少一步，接手的人就得重新问一遍。</p>
+
+        <div class="kp-h4">五步各自要回答什么</div>
+        <table class="kp-table">
+          <colgroup><col style="width:14%"><col style="width:25%"><col style="width:61%"></colgroup>
+          <thead><tr><th>步骤</th><th>必须回答</th><th>合格证据</th></tr></thead>
+          <tbody>
+            <tr><td>现象</td><td>谁、在什么入口、从几点开始、现在是否仍在发生</td><td>报错原文 + 时间窗口 + 影响面；不要只写“网站很慢”</td></tr>
+            <tr><td>证据</td><td>哪条命令、看到哪一行、这行说明什么</td><td>命令 + 输出关键行 + 采集时间；一条根因至少配一条证据</td></tr>
+            <tr><td>判断</td><td>一句话根因，能解释全部证据，并回答为什么没早发现</td><td>“app 因配置项 X 启动失败，8080 未监听”，不是“可能是网络问题”</td></tr>
+            <tr><td>修复</td><td>改了哪个对象、哪个值、如何回滚、先止血还是根治</td><td>文件 + 行号 + 参数旧值/新值；危险操作前留备份</td></tr>
+            <tr><td>验证</td><td>用修复前同一条命令、同一个观察窗口，看到什么算恢复</td><td>状态码、端口、日志行、观察 3 分钟；不要写“应该好了”</td></tr>
+          </tbody>
+        </table>
+
+        <div class="kp-h4">最小工单骨架</div>
+        <div class="kp-cmd"><span class="c"># 时间、主机、操作者先固定事实</span>
+date -Is; hostname; whoami
+<span class="c"># 现象：原始报错 + 时间窗口</span>
+journalctl -u nginx --since "2026-11-19 09:00" --no-pager | tail -50
+<span class="c"># 证据：监听、容量、连接分别取证</span>
+ss -tlnp | grep -E ':80|:8080'; df -h /var; df -i /var
+<span class="c"># 验证：修复前后同一条命令</span>
+curl -sS -o /dev/null -w "%{http_code} %{time_total}\n" http://127.0.0.1/
+ss -tlnp | grep :8080</div>
+
+        <div class="kp-h4">复盘不是写经过</div>
+        <p>复盘要问 5 Why，直到落到<b>监控或流程</b>：为什么 502 → 为什么 8080 没监听 → 为什么 app 启动失败 → 为什么配置缺失 → 为什么发布检查没拦住。每条 Action 必须带 <b>owner、截止时间、验收方式</b>，否则只是愿望清单。</p>
+        <div class="kp-pit"><b>坑</b><div>把“已重启、已恢复”当根因；把“调了一下配置”当修复动作；把“应该好了”当验证。三者都会让下一次同类故障重新来一遍。</div></div>
+        <div class="kp-rel">配套课程：<a href="#/course" onclick="openLesson('l30');return false">第 30 课 · 工单与复盘</a> · <a href="#/course" onclick="openLesson('l35');return false">第 35 课 · 综合项目</a> · <a href="#/lab" onclick="goLab('lab-triage');return false">W16 取证实验</a> · <a href="#/triage" onclick="goTri('method');return false">排障台「方法论」</a></div>
+      </article>
       <article class="kp" id="fd-disk" data-k="disk">
         <div class="kp-h"><span>13</span><h3>磁盘满：块满、已删未释放、容器层三种不同的满</h3></div>
         <p class="kp-lead">值班时看到 <b>No space left on device</b>，多数人第一反应是删日志。但"磁盘满"至少三种成因，处置互不通用：<b>块被占满</b>（df 100%）、<b>空间被删了却没还回来</b>（进程仍持有 fd）、<b>容器层吃满 /var</b>。先分清是哪一种，再动手。</p>
@@ -3309,7 +3343,7 @@ curl -o /dev/null -s -w "%{time_total}\n" http://127.0.0.1:8080/health
   <div class="hero">
     <div class="hero-kicker">OPS TRAINING</div>
     <h1>把故障判断，<br><span>练成</span>可交付的能力。</h1>
-    <p class="hero-lead">8 周主线：专题课、实验、故障挑战、验收。<br>24 周全程：20 题笔试 + 盲排实战。<span class="lead-tail">不承诺头衔；按五步工单（现象、证据、根因、动作、验证）独立值班。</span></p>
+    <p class="hero-lead">8 周主线：专题课、实验、故障挑战、验收。<br>24 周全程：20 题笔试 + 盲排实战。<span class="lead-tail">不承诺头衔；按<a href="#/wiki" onclick="kpJumpWiki('kp-ticket');return false" style="color:var(--acc);text-decoration:none;font-weight:600">五步工单</a>（现象、证据、根因、动作、验证）独立值班。</span></p>
     <div class="hero-stats" id="heroStats"></div>
     <div class="hero-acts">
       <button class="btn primary" id="homeStart" onclick="location.hash='#/camp/1'">开始第 1 周</button>
@@ -3338,7 +3372,7 @@ curl -o /dev/null -s -w "%{time_total}\n" http://127.0.0.1:8080/health
     </div>
     <div class="he" role="button" tabindex="0" style="cursor:pointer" onclick="location.hash='#/wiki'">
       <div class="he-head"><div class="he-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8.5 4.7L12 12.4 3.5 7.7 12 3z"/><path d="M4.8 11.4L12 15.4l7.2-4"/><path d="M4.8 15.4L12 19.4l7.2-4"/></svg></div><div class="he-no">03</div></div>
-      <b>知识与命令</b><span>18 篇（12 专题 + 6 故障长文）、<span id="homeCmdCount" style="display:inline">127 条命令</span>；学的时候不查，卡住再查，别把“查”当“学”</span><i>进知识体系 →</i>
+      <b>知识与命令</b><span>19 篇（13 专题 + 6 故障长文）、<span id="homeCmdCount" style="display:inline">127 条命令</span>；学的时候不查，卡住再查，别把“查”当“学”</span><i>进知识体系 →</i>
       <a href="#/cmd" onclick="event.stopPropagation()" style="display:inline-block;margin-top:7px;font-size:12px;color:var(--acc);font-weight:600;text-decoration:none">命令中心 →</a>
     </div>
     <div class="he" role="button" tabindex="0" style="cursor:pointer" onclick="location.hash='#/browse'">
@@ -3534,6 +3568,7 @@ curl -o /dev/null -s -w "%{time_total}\n" http://127.0.0.1:8080/health
 <section class="view" id="view-browse">
   <div class="hero-kicker">QUESTION BANK · 386 题</div>
   <h2 class="section-title">题库浏览与搜索</h2>
+  <p class="browse-note">部分题目标注参考来源；未标注题目为站内整理题，答案依据对应知识点、命令、课程或实验。</p>
   <div class="search-row">
     <input type="text" id="searchInput" placeholder="输入关键词搜索题干，如 SIP、OSPF、tcpdump、子网…">
     <select id="filterCat"><option value="">全部模块</option></select>
@@ -4982,6 +5017,14 @@ const QUESTIONS = [
  exp:'load 的 1/5/15 是过去 1、5、15 分钟的平均值，看趋势而非瞬时。内存要看 <b>available</b>：free 几乎总接近 0 是正常现象（Linux 会用空闲内存做缓存），available 才是真正还能分给新进程的量。'}
 ];
 
+// V76：来源分层只做后台标记，不伪造外部来源。
+// official=厂商/官方文档；community=社区或面试站；internal=站内整理题。
+QUESTIONS.forEach(q=>{
+  if(q.sourceType) return;
+  const u=String((q.src&&q.src.u)||'');
+  q.sourceType=/docs\.nginx\.com|cloudflare\.com/i.test(u)?'official':(u?'community':'internal');
+});
+
 // 逐项错因：键=题号，数组下标=选项；正确项为空串。仅覆盖核心高频题，分批补。
 const QWHY={
  "net01":["第二层，管 MAC 与帧的转发，不做 IP 寻址。", "", "第四层，负责端口到端口的传输（TCP/UDP）。", "第五层，管会话建立与维持，不参与寻址路由。"],
@@ -5364,6 +5407,130 @@ const TRACK_STAGES=[
     ]
   }
 ];
+// V76：题库选项治理第一批。只改选项与正确下标，不动题干、分类、答案依据。
+const V76_Q_PATCH={
+ cs11:{opts:['openssl s_client -connect 域名:443','openssl x509 -noout -dates','curl -I https://域名','openssl rsa -check'],a:[0]},
+ sc06:{opts:['firewall-cmd --add-port=8080/tcp --permanent; firewall-cmd --reload','firewall-cmd --add-port=8080/tcp --reload','iptables -A INPUT -p tcp --dport 8080 -j ACCEPT; service iptables save','firewall-cmd --permanent --open-port=8080'],a:[0]},
+ cs16:{opts:['journalctl --vacuum-size=200M','rm -rf /var/log/journal','journalctl --rotate','truncate -s 0 /var/log/messages'],a:[0]},
+ cs06:{opts:['systemctl restart mysqld','ss -lntp | grep 3306','mysql -uroot -p','tail -f /var/log/mysqld.log'],a:[1]},
+ cs15:{opts:['Threads_connected','Innodb_buffer_pool_reads','Seconds_Behind_Master','Com_select'],a:[2]},
+ lx34:{opts:['inode 耗尽','磁盘坏道需换盘','内存不足看 free','网络中断看 ping'],a:[0]},
+ cl12:{opts:['command 支持管道符','不幂等，优先专用模块','shell 不能执行命令','两者等价且都可幂等'],a:[1]},
+ cl04:{opts:['CMD 固定主程序，ENTRYPOINT 易被覆盖','两者完全等价','ENTRYPOINT 固定主程序，CMD 易被覆盖','ENTRYPOINT 不能执行命令'],a:[2]},
+ db11:{opts:['skip-grant-tables','停库删除权限表再重启','直接编辑 mysql.user 文件','用 mysqladmin 猜密码'],a:[0]},
+ vp27:{opts:['REGISTER → INVITE → 100 → 200 → ACK → BYE','INVITE → 100/180 → 200 OK → ACK → BYE','200 OK → INVITE → ACK','INVITE → ACK → 100'],a:[1]},
+ cl14:{opts:['直接在 main 分支提交','新建 feature 分支','复制整个目录再上传','删除历史后重新提交'],a:[1]},
+ cs14:{opts:['反复 restart 直到成功','看 journalctl 与 dmesg','直接换服务器','改进程名'],a:[1]},
+ fb06:{opts:['GPON 下行 10G，EPON 上行 1G','两者都是 10G','GPON 2.488/1.244G，EPON 1.25G','GPON 只有 100M'],a:[2]},
+ cs08:{opts:['复用连接、扩端口范围','禁用网卡','杀掉 TIME_WAIT 进程','降低 MTU'],a:[0]},
+ cs12:{opts:['timedatectl 设时区','chrony/NTP 自动同步','手动改日志时间','忽略时间差'],a:[1]},
+ cs20:{opts:['磁盘文件太多，删文件','句柄上限低，调大 nofile','inode 损坏','重启浏览器'],a:[1]},
+ lx12:{opts:['-9 优雅退出，-15 强制','没有区别','-15 优雅退出，-9 强制','-15 立即抹内存'],a:[2]},
+ sc03:{opts:['iptables -A INPUT -p tcp --dport 22 -j DROP','iptables -P 22 ACCEPT','iptables -A OUTPUT port 22','iptables -A INPUT -p tcp --dport 22 -j ACCEPT'],a:[3]},
+ lx31:{opts:['systemctl restart nginx','journalctl -u nginx','reboot 整台机器','改 unit 忽略失败'],a:[1]},
+ dg16:{opts:['Statistics → RTP Analysis','Telephony → RTP Streams','File → Save','View → Zoom'],a:[1]},
+ vp16:{opts:['200 OK 与 481','404','486','200 OK 与 487'],a:[3]},
+ cl20:{opts:['存储全部指标','替代容器运行时','做可视化看板','管理网卡配置'],a:[2]},
+ cl11:{opts:['二进制可执行文件','YAML 描述的 play','Inventory 主机清单','SQL 表'],a:[1]},
+ cs04:{opts:['journalctl -u nginx','直接重装 Nginx','nginx -t 检查配置','重启电脑'],a:[2]},
+ sc09:{opts:['ESTABLISHED,INVALID','NEW','INVALID','ESTABLISHED,RELATED'],a:[3]},
+ cl08:{opts:['编排单容器应用','编排多容器应用','构建内核','硬件监控'],a:[1]},
+ sc08:{opts:['DDoS 应用层，CC 流量型','DDoS 流量型，CC 应用层','两者相同','DDoS 只攻击 DNS'],a:[1]},
+ db03:{opts:['DROP DATABASE','ALTER 改密码','RESTART 网络','myisamchk -r'],a:[3]},
+ cl19:{opts:['blackbox_exporter','node_exporter','mysqld','kube-proxy'],a:[1]},
+ vp09:{opts:['180 带 SDP，183 不带','完全相同','183 带 SDP 早期媒体','183 表示挂断'],a:[2]},
+ dg13:{opts:['查话机编码是否为 G.729','查防火墙与 NAT','查铃声音量','查账号密码'],a:[1]},
+ vp30:{opts:['SIP 端口错误','话机没电','号码欠费','NAT 映射错误'],a:[3]},
+ dg12:{opts:['先重启服务器','查安全组与路由','查监听与防火墙','直接格式化'],a:[2]},
+ cl01:{opts:['每个容器带 Guest OS','共享宿主机内核','不能运行 Linux','两者完全相同'],a:[1]},
+ rt16:{opts:['Access 连路由器，Trunk 连电脑','两者没区别','Access 单 VLAN，Trunk 多 VLAN','Trunk 只能单 VLAN'],a:[2]},
+ vp31:{opts:['固定从 5060 回包','提高编码码率','按实际源地址回 RTP','防止注册超时'],a:[2]},
+ lx33:{opts:['alice 不在 share 组','ACL 语法写错','父目录 /data 缺 x 位','SELinux 拦截'],a:[2]},
+ cl10:{opts:['Playbook 任务剧本','Inventory 主机清单','Dockerfile','crontab'],a:[1]},
+ fb11:{opts:['带宽 250MHz，串扰更小','带宽 100MHz，串扰更大','只能跑 10M','接头形状不同'],a:[0]},
+ vp11:{opts:['401 是鉴权挑战','401 是密码错误','401 是服务器故障','401 是号码停机'],a:[0]},
+ vp20:{opts:['编码 10000，端口 8','TTL 10000，版本 8','端口 10000，载荷 8','带宽 10000，优先级 8'],a:[2]},
+ cs17:{opts:['只绑回环地址','只绑 0.0.0.0','端口号太小','客户端要重启'],a:[0]},
+ sc16:{opts:['继续加大呼叫','让客户卸载安全软件','降频、换号、申诉','改显示名继续打'],a:[2]},
+ db10:{opts:['记录所有密码','记录慢 SQL','自动杀慢查询','复制数据到从库'],a:[1]},
+ lx29:{opts:['所有人都能改','这是目录可 cd','root 可读写，其他只读','设了 SUID 以 root 运行'],a:[2]},
+ cs07:{opts:['文件系统错误','挂载参数写错','权限不足','系统自动加密'],a:[0]},
+ fb05:{opts:['OLT、ODN、ONU','路由器、交换机、防火墙','OLT、OLT、OLT','光猫、网线、电脑'],a:[0]},
+ lx32:{opts:['服务只监听 0.0.0.0','8080 无监听，80 正常','nginx 没启动','防火墙拦 8080'],a:[1]},
+ lx30:{opts:['文件系统块大小不同','已删除文件仍被进程占用','inode 用完了','分区未格式化'],a:[1]},
+ cl06:{opts:['docker rm 自动备份','数据卷独立于容器','可写层永久保存','镜像缓存'],a:[1]},
+ vp26:{opts:['RFC 2833','Inband 音频','SIP INFO','人工记录'],a:[0]},
+ sc05:{opts:['区域 Zone','策略 Policy','Table','Chain'],a:[0]},
+ dg19:{opts:['ss -tlnp | grep established | wc -l','ss -tan state established | wc -l','netstat -a 人工数','ps aux | grep tcp'],a:[1]},
+ cs18:{opts:['改单一 DNS 为 8.8.8.8','配多个 DNS 并 dig 测试','删除 resolv.conf','所有域名写 hosts'],a:[1]},
+ sc17:{opts:['留合同与日志','删除所有日志','口头解释','关闭所有线路'],a:[0]},
+ sc14:{opts:['对称用公私钥，非对称同密钥','对称同密钥快，非对称便于分发','非对称更快','两者都不需要密钥'],a:[1]},
+ db08:{opts:['mysqldump 库 < bak.sql','mysql 库 > bak.sql','mysqldump 库 > bak.sql','dump 库 bak.sql'],a:[2]},
+ sc19:{opts:['封禁所有来源 IP','失败超限封 IP','替换 SSH 密钥','自动重启服务器'],a:[1]},
+ dg09:{opts:['curl -I host 443','nc -vz host 443','ssh host 443','ping host 443'],a:[1]},
+ fb12:{opts:['给笔记本 100W','网线同时供电与数据','提高光纤速率','屏蔽电磁干扰'],a:[1]},
+ cl24:{opts:['固定 Pod IP 地址','服务发现与负载均衡','分配真实磁盘','管理镜像版本'],a:[1]},
+ rt10:{opts:['iBGP 必须物理直连','eBGP 用 AS_PATH，iBGP 不防环','iBGP 同 AS，eBGP 跨 AS','两者管理距离相同'],a:[2]},
+ cl16:{opts:['Prometheus 是监控系统','Jenkins、GitLab CI','Nginx、Redis、MySQL','Docker 是容器'],a:[1]},
+ vp14:{opts:['超时无响应','编码不匹配','对方挂断','鉴权失败'],a:[0]},
+ dg15:{opts:['DNS 污染','MTU 黑洞','浏览器版本低','证书过期'],a:[1]},
+ dg14:{opts:['与丢包无关','关闭 RTCP','链路丢包','调大音量'],a:[2]},
+ vp06:{opts:['CANCEL 挂断已建立','没有区别','CANCEL 取消未建立','BYE 只能主叫发'],a:[2]},
+ cs01:{opts:['重启服务器','关闭所有外网','top 看进程','加大内存'],a:[2]},
+ db13:{opts:['WHERE 后，HAVING 前','两者完全等价','WHERE 前，HAVING 后','HAVING 不能用聚合'],a:[2]},
+ cs09:{opts:['内存不足','磁盘满了','CPU 过热','病毒攻击'],a:[0]},
+ cron04:{opts:['脚本无执行权限','PATH 不同','cron 未启动','磁盘满'],a:[1]},
+ dg22:{opts:['SIP 没注册','号码格式错','RTP 端口未放行','NAT 映射失败'],a:[3]},
+ db02:{opts:['mysqld 未启动','SQL 语句写错','客户端版本新','表名重复'],a:[0]},
+ vp29:{opts:['把设备放地上','接到 PSTN','挂断电话','把 SIP 转 HTTP'],a:[1]},
+ vp32:{opts:['先呼 B 再呼 A','先呼 A 再呼 B','给客户发短信','只在话单标记'],a:[1]},
+ dg02:{opts:['逐跳递减 TTL','逐跳递增 TTL','发送超大帧','查询 DNS'],a:[1]},
+ cl15:{opts:['频繁合入并自动测试','发布前人工测一次','一台机器只部署一次','代码写完不测试'],a:[0]},
+ sc11:{opts:['先对称协商再非对称加密','全程非对称传数据','先非对称协商，对称加密','不需要密钥'],a:[2]},
+ cs10:{opts:['显卡故障','显示器卡顿','I/O 等待','CPU 核数太少'],a:[2]},
+ dg04:{opts:['tcpdump port eth0','tcpdump -i any 5060','tcpdump -i eth0 -nn port 5060','tcpdump -i eth1 port 5060'],a:[2]},
+ net18:{opts:['IP 解析为 MAC','MAC 解析为 IP','域名解析为 IP','端口映射到进程'],a:[0]},
+ net20:{opts:['逻辑上分割广播域','物理上延长传输距离','把单播转为广播','给每个端口固定 IP'],a:[0]},
+ rt01:{opts:['最长前缀优先','管理距离最小优先','带宽最大优先','按书写顺序匹配'],a:[0]},
+ lx05:{opts:['临时获属主权限','永久获得 root 权限','让所有用户可写','禁止程序执行'],a:[0]},
+ dg01:{opts:['ICMP 被禁','服务器宕机','DNS 解析失败','网卡速率错'],a:[0]},
+ net24:{opts:['限制转发跳数','标记服务类型','计算首部校验','表示报文优先级'],a:[0]},
+ rt08:{opts:['100 Mbps','10 Mbps','1000 Mbps','自动协商'],a:[0]},
+ lx07:{opts:['ls -la','ls -l','ls -a','ls -lh'],a:[0]},
+ lx18:{opts:['ip addr','ifconfig','ip route','ss -lntp'],a:[0]},
+ dg21:{opts:['广播风暴（二层环路）','广播风暴（三层环路）','ARP 欺骗','MTU 黑洞'],a:[0]},
+ dg24:{opts:['ARP 欺骗','DNS 污染','IP 冲突','路由环路'],a:[0]},
+ cl13:{opts:['git clone','git pull','git fetch','git checkout'],a:[0]},
+ cl17:{opts:['主动 Pull','被动 Push','SNMP Trap','日志采集'],a:[0]},
+ cl22:{opts:['Pod','Node','容器','Deployment'],a:[0]},
+ cl23:{opts:['副本与自愈','端口与 DNS','只存镜像','只做备份'],a:[0]},
+ sc10:{opts:['网络层','传输层','应用层','链路层'],a:[0]},
+ db04:{opts:['加快查询但拖慢写入','加快写入但拖慢查询','自动备份数据','压缩表空间'],a:[0]},
+ db06:{opts:['事务、行锁、外键','全文索引与压缩','只读查询与缓存','跨库 Join 与视图'],a:[0]},
+ db07:{opts:['左表全保留，右表补 NULL','右表全保留，左表补 NULL','两表都只留匹配行','自动去重后输出'],a:[0]},
+ db09:{opts:['binlog → relay log','redo log → undo log','slow log → error log','relay log → binlog'],a:[0]},
+ cs02:{opts:['句柄未释放','df 统计不准','inode 耗尽','分区未挂载'],a:[0]},
+ cl02:{opts:['镜像只读，容器可写','镜像可写，容器只读','两者都是只读','两者都是可写'],a:[0]},
+ cl03:{opts:['FROM 与 CMD','RUN 与 COPY','ENV 与 EXPOSE','WORKDIR 与 USER'],a:[0]},
+ cl09:{opts:['无 Agent','必须装 Agent','只支持本地','只能推镜像'],a:[0]},
+ cl25:{opts:['声明期望，控制器收敛','声明期望，手工执行','只读当前状态','定时重启 Pod'],a:[0]},
+ vp06:{opts:['BYE 可取消未建立','CANCEL 挂断已建立','CANCEL 取消未建立','CANCEL 与 BYE 都用于注册'],a:[2]},
+ vp33:{opts:['时延（Latency）','抖动（Jitter）','丢包率（Packet Loss）','CPU 主频'],a:[0,1,2]},
+ lx12:{opts:['-9 允许优雅退出','-9 只发 SIGTERM','-15 优雅退出，-9 强制','-15 立即抹内存'],a:[2]},
+ lx34:{opts:['inode 耗尽','磁盘块满','权限不足','文件句柄耗尽'],a:[0]},
+ dg03:{opts:['只能测本机延迟','持续结合逐跳路径与每跳丢包率、时延，直观看出哪一跳劣化','能加密流量','自动修改路由'],a:[1]},
+ dg12:{opts:['先重启服务器','查安全组与路由','查监听与防火墙','只改客户端 DNS'],a:[2]},
+ db13:{opts:['WHERE 后，HAVING 前','WHERE 在分组后过滤','WHERE 前，HAVING 后','HAVING 不能用聚合'],a:[2]},
+ cs04:{opts:['journalctl -u nginx','重启 systemd','nginx -t 检查配置','清理浏览器缓存'],a:[2]},
+ cs09:{opts:['内存不足','磁盘满了','CPU 过热','内存泄漏'],a:[0]},
+ cs10:{opts:['网络丢包','DNS 延迟','I/O 等待','CPU 核数太少'],a:[2]},
+ cs19:{opts:['默认路由/出口 NAT、出站安全组或防火墙策略','出站带宽','入站带宽','CPU 主频'],a:[0]},
+ cl04:{opts:['CMD 固定主程序，ENTRYPOINT 易被覆盖','CMD 与 ENTRYPOINT 可互换','ENTRYPOINT 固定主程序，CMD 易被覆盖','ENTRYPOINT 不能执行命令'],a:[2]},
+ svc03:{opts:['start 会顺带设成开机自启','enable 会立即把服务跑起来','start 只影响本次运行，enable 只影响开机自启','两者都只影响本次运行'],a:[2]}
+};
+QUESTIONS.forEach(q=>{ if(V76_Q_PATCH[q.id]) Object.assign(q,V76_Q_PATCH[q.id]); });
+// 选项顺序已重写，逐项错因按旧下标会错位：清掉旧索引，保留题目通用解析。
+Object.keys(V76_Q_PATCH).forEach(id=>{ if(typeof QWHY!=='undefined') delete QWHY[id]; });
 const LESSONS=[
 {id:'l01',mins:12,title:'认识运维与命令行',diagram:null,why:'运维的日常从一条 SSH 连接开始：没有图形界面，你要靠命令确认「我是谁、我在哪、这台机器现在什么状态」，再决定动不动手。这一课不讲概念，只把开场那五条命令拆开，让你看得懂输出、敢下手。',points:['开场三件事：身份（whoami/id）、位置（pwd）、机器状态（uptime），决定你能改什么、改的是哪个文件、现在该不该动','命令结构固定是「命令 [选项] [参数]」：短选项可合并成 -lh，长选项用 --，参数是操作对象（文件、目录、主机）','管道 | 把前一条的输出交给后一条当输入；> 覆盖写、>> 追加、2> 接管错误输出，这三者用错会直接清空文件','ls 不加 -l 只给文件名，看不到权限、属主、大小；不加 -a 看不到点开头的隐藏文件','危险命令之前先问三句：改哪些文件、要不要 root、失败能不能回滚'],steps:[{h:'先确认身份：你到底是 root 还是普通用户',p:'很多人第一步就失败，是因为权限不够却以为是命令写错。whoami 只给用户名，id 才给 uid 和组。',c:'whoami; id',out:'ops\nuid=1000(ops) gid=1000(ops) groups=1000(ops),10(wheel)',watch:'uid 0 才是 root；groups 里有 wheel 才有 sudo 资格；普通用户的 uid 一般从 1000 起。'},{h:'再看机器状态：跑了多久、现在忙不忙',p:'负载高不等于 CPU 高，先看三个时间窗口的均值，再决定要不要往下查。',c:'hostname -f; uptime',out:'web01.example.com\n 09:12:04 up 42 days,  3:07,  2 users,  load average: 0.08, 0.12, 0.09',watch:'三个数依次是 1/5/15 分钟平均负载；单核机器超过 1 才开始排队，4 核要到 4 左右才算满。'},{h:'确认位置：别在错误目录里动手',p:'pwd 给绝对路径，ls -la 连隐藏文件一起列，这两条是「我面前有什么」的完整答案。',c:'pwd; ls -la',out:'/home/ops\ntotal 24\ndrwxr-xr-x. 2 ops  ops  4096 Nov 19 09:02 .\ndrwxr-xr-x. 6 root root 4096 Oct 12 08:11 ..\n-rw-------. 1 ops  ops  1204 Nov 18 21:30 .bash_history\n-rw-r--r--. 1 ops  ops   181 Oct 12 08:11 .bashrc',watch:'首列 d 是目录、- 是文件、l 是链接；点开头的是隐藏文件，只有 -a 才显示。'},{h:'把一条命令拆成三段：命令、选项、参数',p:'看懂结构才能举一反三，不用背整句。',c:'ls -lh /var/log/nginx',out:'total 1.2M\n-rw-r--r--. 1 nginx nginx 1.2M Nov 19 09:10 access.log\n-rw-r--r--. 1 nginx nginx   18K Nov 19 09:10 error.log',watch:'ls 是命令，-l -h 是两个短选项（可写成 -lh），/var/log/nginx 是参数；-h 只把字节换算成 K/M，不改内容。'},{h:'管道：把输出变成下一条的输入',p:'运维一大半组合命令都靠这个符号，先建立「左边产出、右边消费」的直觉。',c:'ls /etc | wc -l; grep -c "" /var/log/nginx/access.log',out:'128\n4021',watch:'| 连接两条命令；> 会清空后重写，>> 才是追加；2> 单独接管报错，别和 > 混用。'},{h:'少打字：Tab 补全和 Ctrl+R 搜历史',p:'手打路径是事故来源之一，补全能挡掉大部分拼写错误。',c:'history | tail -5',out:'  512  systemctl status nginx\n  513  journalctl -u nginx -n 50 --no-pager\n  514  ls -lh /var/log/nginx',watch:'Tab 补全命令名与路径；Ctrl+R 反向搜历史，比翻 .bash_history 快；history 里的内容会落盘。'},{h:'动手前的三问，比任何快捷键都重要',p:'rm、dd、> 文件、chmod -R 这类命令的共同点是「不可逆」。先回答：改哪些文件、要不要 root、失败怎么回滚。',c:'ls -l /path/to/target; cp -a /path/to/target /path/to/target.bak.$(date +%F)',watch:'先 ls 确认对象，再备份，最后才执行危险动作；生产上养成 mv 代替 rm 的临时习惯。'}],cmds:[{c:'id',d:'查看当前用户的 uid、gid 与所属组',o:'uid=1000(ops) gid=1000(ops) groups=1000(ops),10(wheel)',r:'uid 为 0 才是 root；groups 里有没有 wheel 决定能不能 sudo。',bad:'用 whoami 判断权限：它只给用户名，不给组，看不出能否 sudo。'},{c:'ls -la',d:'列出目录全部内容，含隐藏文件',o:'drwxr-xr-x. 2 ops ops 4096 Nov 19 09:02 .',r:'首列 d/-/l 区分目录、文件、链接；点开头是隐藏文件。',bad:'只敲 ls：.env、.bashrc 这类隐藏文件会被漏掉。'},{c:'uptime',d:'开机时长与 1/5/15 分钟平均负载',o:' 09:12:04 up 42 days, 3:07, 2 users, load average: 0.08, 0.12, 0.09',r:'三个数按 1/5/15 分钟排；要和 CPU 核数对比才有意义。',bad:'把 load 高直接当 CPU 高：D 状态（I/O 等待）也会把 load 顶上去。'},{c:'history | tail -5',d:'看最近执行过的命令',o:'  512  systemctl status nginx',r:'配合 Ctrl+R 反向搜；命令会写进 .bash_history。',bad:'把密码写在命令行里：会原样落进 history 文件。'},{c:'wc -l',d:'统计行数',o:'4021',r:'管道后常用：ls | wc -l 数文件个数，日志 | wc -l 数行数。',bad:'想数字符却用了 -l：字符数是 -c，-l 只数换行。'}],params:[{p:'-l',m:'长格式：权限、属主、大小、时间'},{p:'-a',m:'显示点开头的隐藏文件'},{p:'-h',m:'大小换算成 K/M/G，只影响显示'},{p:'|',m:'把左边命令的输出交给右边当输入'},{p:'> / >>',m:'覆盖写 / 追加写，用错会清空文件'}],errors:['把 ls 的输出当文件名清单：不带 -l 看不到权限和属主，容易改错对象','用 > 当追加：它会先清空文件，日志和配置会被写成空文件','在不确定的目录里执行 rm 或 mv：先 pwd、再 ls，最后才动手'],scene:'接手一台陌生服务器，先 whoami、hostname、uptime、pwd、ls -la 建立基本盘，再决定动哪里——这是所有值班的开场。',verify:'不看笔记解释 ls -lh /var/log/nginx 每一段；用一条命令只列出 /etc 下最近修改的 5 个条目；说清 > 与 >> 的差别。',practice:['t01'],quiz:[
   {t:'single',q:'登录一台陌生服务器，第一步最应该做什么？',o:['直接改配置','先确认身份和位置：whoami、pwd','先装需要的软件','先重启服务'],a:1,exp:'身份决定你能改什么，位置决定你改的是哪个文件。先 whoami、pwd、ls -l，是所有人的标准开场。'},
@@ -8281,7 +8448,7 @@ const CAMP_WEEK_META=[
  {w:18,t:'Linux 安全',s:'最小权限、SSH 加固、iptables/nftables、SELinux',ready:1},
  {w:19,t:'Shell 自动化',s:'变量、循环、函数、正则、错误处理',ready:1},
  {w:20,t:'Python 与自动化运维',s:'文件与 JSON、异常、SSH 批量、Ansible 入门',ready:1},
- {w:21,t:'Docker',s:'镜像、容器、Dockerfile、网络、卷、Compose',ready:1},
+ {w:21,t:'Docker 与 Kubernetes',s:'镜像、容器、Dockerfile、网络、卷、Compose、K8s 基础',ready:1},
  {w:22,t:'数据库与中间件',s:'MySQL 用户权限、索引、备份恢复、Redis',ready:1},
  {w:23,t:'监控与告警',s:'Prometheus、Grafana、指标、告警规则',ready:1},
  {w:24,t:'综合项目',s:'多服务环境搭建、故障模拟、复盘报告',ready:1}
@@ -10595,6 +10762,24 @@ Object.assign(CAMP_LESSONS[21],{"lab": {"id": "lab-docker", "name": "实验十�
 Object.assign(CAMP_LESSONS[22],{"lab": {"id": "lab-db", "name": "实验十四：索引、备份位点与 Redis 上限", "note": "页面内模拟终端：EXPLAIN、索引列、binlog 位点、Redis 内存与连接数为预置快照，按判据核对；备份恢复需在真实库执行。", "steps": ["EXPLAIN 看 type/key/rows", "核对最左前缀", "做带位点的备份", "验 MASTER_LOG_POS", "看 Redis maxmemory", "扫大 key 与连接"]}});
 Object.assign(CAMP_LESSONS[23],{"lab": {"id": "lab-monitor", "name": "实验十五：监控告警，先修规则再压噪声", "note": "页面内模拟终端：rules.yml 与 alertmanager.yml 为预置配置，promtool/amtool 校验按真实语法判定；告警发送链路需真实环境验证。", "steps": ["看 rules.yml 找 for: 0s", "改 for: 2m", "promtool 校验", "amtool 校验路由", "看 firing 告警", "建有时限静默"]}});
 /*LAB-PATCH-END*/
+// V76：训练营 W5/W6/W7 改成应用/现场题，保持知识点不变，换场景与证据。
+Object.assign(CAMP_LESSONS[5],{quiz:[
+ {t:'single',q:'lsblk 显示 vdb 是 disk、vdb1 是 part 并挂在 /var；df -h /var 已到 92%。要定位 /var 下哪个子目录增长最快，下一步命令是？',o:['du -h --max-depth=1 /var | sort -h','fdisk -l /dev/vdb','mkfs.ext4 /dev/vdb1','mount -a'],a:0,exp:'先按一级子目录排序找增长点；fdisk/mkfs/mount 都不解决“谁占空间”的问题。'},
+ {t:'single',q:'新盘 4TB，同事用 fdisk 建了 MBR 分区表，系统只识别约 2TB。要用满全部容量，应该？',o:['改用 GPT 分区表并重新分区','把扇区大小改成 512','直接 mkfs.xfs，不用改分区表','把盘格式化为 FAT32'],a:0,exp:'MBR 单盘上限 2TB；4TB 必须 GPT。格式化解决不了分区表容量上限。'},
+ {t:'single',q:'改完 /etc/fstab 后重启，系统进入 emergency mode。救援 shell 里最应该先做什么？',o:['用 mount -a 复现报错，定位哪一行 fstab 写错','立刻 mkfs 根分区','删除 /etc/fstab 后重启','重装系统'],a:0,exp:'mount -a 会按 fstab 逐条挂载并报错，先拿到错误行再修；mkfs/重装都会毁数据。'},
+ {t:'single',q:'df 显示 /var 已用 95%，但 du -sh /var 只有 40G。要找出 /var 下大于 100M 的普通文件，命令是？',o:['find /var -type f -size +100M -exec ls -lh {} +','du -sh /var/*','ls -lh /var','df -i /var'],a:0,exp:'find 按文件大小筛普通文件；du 只给目录汇总，ls 看不到深层文件，df -i 看的是 inode。'},
+ {t:'single',q:'执行 mkfs.ext4 /dev/vdb1 返回“is mounted; will not make a filesystem here”。正确处置是？',o:['先 umount /dev/vdb1，确认数据已备份后再格式化','加 -f 强制格式化','重启后会自动格式化','改成 mkfs.xfs 就不会报错'],a:0,exp:'已挂载设备不允许 mkfs；先卸载并确认数据已备份，强制或换文件系统都不解决占用。'}]});
+Object.assign(CAMP_LESSONS[6],{quiz:[
+ {t:'single',q:'应用在 /var 下创建文件报 No space left on device，但 df -h /var 还有 20% 空闲。最可能耗尽的是？',o:['inode','内存','CPU','端口'],a:0,exp:'块有余量但 inode 用尽时，内核仍拒绝创建新文件；df -i 可确认。'},
+ {t:'single',q:'怀疑 /var 的 inode 被大量小文件耗尽，第一步应该看哪个命令的输出？',o:['df -i /var','df -h /var','free -h','iostat -x 1'],a:0,exp:'df -i 直接给 Inodes、IUsed、IFree、IUse%；df -h 只看块容量，会漏掉 inode 耗尽。'},
+ {t:'single',q:'lvextend -L +10G /dev/vg/data 成功，但 df -h 容量没变。下一步是？',o:['对文件系统执行 xfs_growfs /data 或 resize2fs /dev/vg/data','重启服务器','重新 mkfs','再执行一遍 lvextend'],a:0,exp:'lvextend 只扩块设备；文件系统要单独扩，df 才会反映新容量。'},
+ {t:'single',q:'监控告警说 /var/log 下有 180 万个文件。要按目录统计普通文件数量、定位哪个子目录堆积，命令是？',o:['find /var/log -type f | awk -F/ \'{print "/"$2"/"$3"/"$4}\' | sort | uniq -c | sort -rn | head','du -sh /var/log','df -i /var/log','ls /var/log | wc -l'],a:0,exp:'find 列出普通文件，awk 取目录层级，sort/uniq 计数后倒序；du 只算块占用，ls 只列一层。'},
+ {t:'single',q:'扩容 LV 后 df 仍显示旧容量，但 lsblk 已看到 LV 变大。最可能漏了哪一步？',o:['没有扩文件系统','没有重启','没有重新挂载','没有重新 mkfs'],a:0,exp:'块设备变大不等于文件系统变大；xfs_growfs/resize2fs 才是最后一步。'}]});
+Object.assign(CAMP_LESSONS[7],{quiz:[
+ {t:'single',q:'同事把公钥文件放到服务器 /root/.ssh/id_rsa，SSH 仍报 Permission denied (publickey)。公钥应放在哪里？',o:['目标用户家目录的 ~/.ssh/authorized_keys','/etc/ssh/ssh_host_rsa_key','/root/.ssh/id_rsa','/etc/passwd'],a:0,exp:'服务器用 authorized_keys 里的公钥验签；id_rsa 是私钥，放到服务器既不对也不安全。'},
+ {t:'single',q:'本机 curl 127.0.0.1:8080 正常，外部访问失败。要证明服务只监听了回环地址，命令是？',o:['ss -lntp | grep :8080','curl -I 127.0.0.1:8080','ip route','iptables -L -n'],a:0,exp:'ss 的 Local Address 会显示 127.0.0.1:8080 还是 0.0.0.0:8080；curl 只能证明本机通。'},
+ {t:'single',q:'远程启用 firewalld 后 SSH 立刻断开，最可能的原因是？',o:['启用前没放行 SSH 端口/服务，默认策略把新连接拦了','服务器自动重启了','SELinux 被关闭了','网卡速率不对'],a:0,exp:'firewalld 默认拒绝未放行流量；远程操作前必须先放行 SSH，否则等于自断入口。'}]});
+
 
 // 训练营图解：与课程中心 DIAGRAMS 独立，避免互相影响
 const CAMPFIG={
@@ -10928,7 +11113,7 @@ const LESSON_LINKS={
  l03:{lab:'lab-nav',kp:'kp-file',camp:1},
  l04:{lab:'lab-perm',kp:'kp-perm',camp:2},
  l05:{lab:'lab-perm',kp:'kp-perm',camp:2},
- l06:{lab:'lab-svc',kp:'kp-proc',field:1,camp:3},
+ l06:{lab:'lab-svc',kp:'kp-svc',field:1,camp:3},
  l07:{lab:'lab-net',kp:'kp-net',camp:9},
  l08:{lab:'lab-net',kp:'kp-net',camp:9},
  l09:{lab:'lab-http',kp:'kp-net',field:1,camp:12},
@@ -10942,8 +11127,8 @@ const LESSON_LINKS={
  l17:{lab:'lab-log',kp:'kp-file',field:1,camp:4},
  l18:{lab:'lab-log',kp:'kp-file',camp:4},
  l19:{lab:'lab-perm',kp:'kp-perm',field:1,camp:2},
- l20:{lab:'lab-svc',kp:'kp-proc',field:1,camp:3},
- l21:{lab:'lab-backup',kp:'kp-proc',camp:8},
+ l20:{lab:'lab-svc',kp:'kp-svc',field:1,camp:3},
+ l21:{lab:'lab-backup',kp:'kp-cron',camp:8},
  l22:{lab:'lab-http',kp:'kp-net',field:1,camp:12},
  l23:{lab:'lab-pcap',kp:'kp-net',field:1,camp:11},
  l24:{lab:'lab-sec',kp:'kp-fw',field:1,camp:18},
@@ -10952,16 +11137,115 @@ const LESSON_LINKS={
  l27:{lab:'lab-disk',kp:'kp-disk',field:1,camp:5},
  l28:{lab:'lab-inode',kp:'kp-disk',field:1,camp:6},
  l29:{lab:'lab-ssh',kp:'kp-net',field:1,camp:7},
- l30:{field:1,camp:8},
+ l30:{kp:'kp-ticket',field:1,camp:8},
  l31:{lab:'lab-route',kp:'kp-net',field:1,camp:10},
- l32:{lab:'lab-python',field:1,camp:20},
+ l32:{lab:'lab-python',kp:'kp-shell',field:1,camp:20},
  l33:{lab:'lab-db',field:1,camp:22},
  l34:{lab:'lab-monitor',field:1,camp:23},
- l35:{lab:'lab-final',field:1,camp:24},
- l36:{lab:'lab-pcap',field:1,camp:11},
- l37:{lab:'lab-http',field:1,camp:12},
- l38:{lab:'lab-sec',field:1,camp:18},
- l39:{lab:'lab-backup',field:1,camp:8}};
+ l35:{lab:'lab-final',kp:'kp-ticket',field:1,camp:24},
+ l36:{lab:'lab-pcap',kp:'kp-net',field:1,camp:11},
+ l37:{lab:'lab-http',kp:'kp-net',field:1,camp:12},
+ l38:{lab:'lab-sec',kp:'kp-fw',field:1,camp:18},
+ l39:{lab:'lab-backup',kp:'kp-svc',field:1,camp:8}};
+// V76：课程 → 题库。只复用现有题目 id，不新增题型/页面/进度状态。
+const V76_PRACTICE={
+ l01:['t01','t03','t04','t05','t39','t53'],
+ l02:['t01','t07','t24','t53','t54','t65'],
+ l03:['t05','t39','t57','t59','t24','t55'],
+ l04:['t02','t26','lx01','lx03','lx04','lx29'],
+ l05:['t23','t55','t38','t63','lx11','lx12'],
+ l06:['t19','t20','t22','t57','t69','svc03'],
+ l07:['net01','net02','net03','net07','net27','net30','t28'],
+ l08:['net10','net11','net12','net13','net14','net15','net16','net17'],
+ l09:['t06','t09','t10','t11','t13','t16','t56','dg09'],
+ l10:['t14','t15','t40','dg04','dg05','dg06','dg18'],
+ l11:['t21','t22','t69','t72','t79','dg11','cs04'],
+ l12:['t20','t22','t69','t72','t73','cs04','cs14'],
+ l13:['t41','t42','t43','t44','t45','t60','cl05','cl06'],
+ l14:['t46','t47','t48','t49','t50','t74','t75','t76','t77','t78'],
+ l15:['net04','net05','net06','t28','t84','t85'],
+ l16:['dg04','dg05','dg06','dg07','dg08','dg14','dg15','dg17'],
+ l17:['t07','t24','t53','t54','t59','t65','t70','t71'],
+ l18:['t08','t42','t44','t53','t58','t70','t71','t54'],
+ l19:['t02','t26','lx03','lx05','lx29','lx33'],
+ l20:['t57','t22','t69','t68','t72','cs14'],
+ l21:['t19','t57','cron01','cron02','cron03','cron04','t38'],
+ l22:['t13','net22','net23','dg09','dg10','dg18','cs18','t34'],
+ l23:['t06','t09','t18','t56','t61','t83','net05','net06'],
+ l24:['fw01','fw02','fw03','fw04','sc01','sc02','sc03','sc05','sc06'],
+ l25:['t04','t55','t62','t66','t67','t68','t80','t81','t82','cs10'],
+ l26:['t08','t26','t59','t65','cron01','cron03','cron04','svc01'],
+ l27:['t03','t07','t53','t58','t65','lx22','lx30','cs02','cs03'],
+ l28:['t64','lx34','cs03','t58','t07','t53','t65','t54'],
+ l29:['t06','t09','t10','t11','t13','t18','t56','t61'],
+ l30:['case01','case02','case03','case04','case05','cs01','cs04','cs14'],
+ l31:['rt01','rt02','rt05','rt09','rt12','rt15','rt16','rt17'],
+ l32:['t46','t47','t48','t49','t50','au01','au02','cl10'],
+ l33:['db01','db02','db03','db07','db09','db10','db12','db13','dbx01','dbx02'],
+ l34:['cl17','cl18','cl19','cl20','t51','t52','mo01','mo02','mo03'],
+ l35:['case01','case02','case03','case04','case05','cs02','cs04','cs19'],
+ l36:['net04','net05','net06','net07','net27','net30','t28','t84','t85'],
+ l37:['net08','net22','net23','dg09','dg10','dg11','dg15','dg18'],
+ l38:['sc07','sc09','sc10','sc11','sc12','sc13','sc14','sc19'],
+ l39:['t19','t57','t39','cs13','cs14','t38','svc03','cron01']
+};
+LESSONS.forEach(l=>{ if(V76_PRACTICE[l.id]) l.practice=V76_PRACTICE[l.id].slice(); });
+// V76.1：第二轮覆盖整理。优先用“同知识点、不同场景”的已有题，替换跨课重复引用；
+// 仍保持每课 6–10 题，不新增题型，不把 voip / fiber 硬塞进 Linux/网络课。
+const V76_PRACTICE_V2={
+ l01:['t01','t05','t39','t53','t55','t63','t68','t80'],
+ l02:['t07','t24','t54','t65','lx06','lx07','lx08','lx28'],
+ l03:['t59','lx09','lx10','lx27','t57','t22','t72','t73'],
+ l04:['t02','t26','lx01','lx03','lx04','lx05','lx29','lx33'],
+ l05:['t23','t55','t63','t38','lx11','lx12'],
+ l06:['lx14','lx15','lx16','lx17','lx31','lx32','svc01','svc02','svc03','svc04'],
+ l07:['net01','net02','net03','net07','net27','net30','net04','net24'],
+ l08:['net10','net11','net12','net13','net14','net15','net16','net17','rt01','rt02'],
+ l09:['t06','t09','t10','t11','t13','t16','t29','dg01','dg02','dg03'],
+ l10:['t14','t15','t40','dg04','dg05','dg06','dg07','dg08','dg12','dg18'],
+ l11:['t21','t22','t69','t72','t79','dg11','cs04','cs05'],
+ l12:['t20','t73','cs06','cs09','cs10','cs13','cs14','cs17','cs20','csx06'],
+ l13:['t41','t42','t43','t44','t45','t60','cl01','cl02','cl03','cl04'],
+ l14:['t46','t47','t48','t49','t50','t74','t75','t76','t77','t78'],
+ l15:['net04','net05','net06','t28','t84','t85','t17','dg19'],
+ l16:['dg13','dg14','dg15','dg16','dg19','dg20','dg21','dg22','dg23','dg24'],
+ l17:['t07','t24','t53','t54','t70','t71','lx08','lx09','lx10','lx28'],
+ l18:['t08','t42','t44','t58','t70','t71','t53','t54'],
+ l19:['t02','t26','lx03','lx05','lx29','lx33'],
+ l20:['t57','t22','t69','t68','t72','cs14','svc02','svc04'],
+ l21:['t19','t57','cron01','cron02','cron03','cron04','t38','lx21'],
+ l22:['t13','net22','net23','dg09','dg10','dg18','cs18','t34'],
+ l23:['t06','t09','t18','t56','t61','t83','net05','net06'],
+ l24:['fw01','fw02','fw03','fw04','sc01','sc02','sc03','sc05','sc06','sc04'],
+ l25:['t04','t55','t62','t66','t67','t68','t80','t81','t82','cs10'],
+ l26:['t08','t26','t59','t65','cron01','cron03','cron04','svc01','lx25','lx10'],
+ l27:['t03','t07','t53','t58','t65','lx22','lx30','cs02','cs03','mo04'],
+ l28:['t64','lx34','cs03','t58','t07','t53','t65','t54'],
+ l29:['t06','t09','t10','t11','t13','t18','t56','t61','net20','net28'],
+ l30:['case01','case02','case03','case04','case05','cs01','cs04','cs14','csx07','csx08'],
+ l31:['rt03','rt04','rt05','rt06','rt07','rt08','rt09','rt10','rt11','rt12'],
+ l32:['au01','au02','cl09','cl10','cl11','cl12','cl13','cl14','cl15','cl16'],
+ l33:['db01','db02','db03','db07','db09','db10','db12','db13','dbx01','dbx02'],
+ l34:['cl17','cl18','cl19','cl20','t51','t52','mo01','mo02','mo03','mo05'],
+ l35:['case01','case02','case03','case04','case05','cs02','cs04','cs19','csx06','dk01'],
+ l36:['net04','net05','net06','net07','net27','net30','t28','t84','t85','net09'],
+ l37:['net08','net22','net23','dg09','dg10','dg11','dg15','dg18','cs11','cs18'],
+ l38:['sc07','sc08','sc09','sc10','sc11','sc12','sc13','sc14','sc19','sc20'],
+ l39:['t19','t57','t39','cs13','cs14','t38','svc03','cron01','lx14','lx15']
+};
+Object.entries(V76_PRACTICE_V2).forEach(([id,pr])=>{ if(LESSONS_MAP[id]) LESSONS_MAP[id].practice=pr.slice(); });
+// V76.2：把重复引用的槽位换成同方向未引用题；不新增题、不改变课程数量。
+const V76_PRACTICE_V3={
+ l13:['t41','t43','t45','t60','cl01','cl02','cl03','cl04','cl05','cl06'],
+ l26:['lx13','lx26','t59','t65','cron01','cron03','cron04','svc01','lx25','lx10'],
+ l29:['net20','net28','rt13','rt14','rt15','rt16','rt17','rt18','rt19','rt20'],
+ l35:['case01','case02','case03','case04','case05','cs04','cs19','cs07','cs08','cs12'],
+ l12:['t20','cs06','cs09','cs10','cs13','cs14','cs17','cs20','cs15','cs16'],
+ l36:['net09','net04','net05','net06','net18','net19','net21','net25','net26','net29'],
+ l37:['net08','net22','net23','dg09','dg10','dg11','dg15','dg17','t25','cs11'],
+ l39:['t19','cs13','cs14','cron01','lx14','lx15','lx18','lx19','lx23','lx24']
+};
+Object.entries(V76_PRACTICE_V3).forEach(([id,pr])=>{ if(LESSONS_MAP[id]) LESSONS_MAP[id].practice=pr.slice(); });
 const DIAGRAMS={
 boot(){
  const n=(x,t,s,c)=>`<rect x="${x}" y="46" width="106" height="62" rx="9" fill="${c}14" stroke="${c}66"/>
@@ -11607,8 +11891,9 @@ const KP_REG={
  'kp-container':{n:'容器与部署',weeks:[13,21],cmds:['docker'],lab:'',tri:''},
  'kp-shell':{n:'Shell 与自动化',weeks:[19,20],cmds:['awk','sed','grep'],lab:'',tri:''},
  'kp-svc':{n:'服务与开机自启',weeks:[3,8,17],cmds:['systemctl','journalctl','tailf','nohup','date'],lab:'lab-svc',tri:'svc'},
- 'kp-cron':{n:'定时任务',weeks:[19],cmds:['crontab','flock','date'],lab:'lab-backup',tri:''},
- 'kp-fw':{n:'防火墙与放行',weeks:[18,23],cmds:['firewall-cmd','iptables','ss','netstat'],lab:'lab-sec',tri:'site'}
+ 'kp-cron':{n:'定时任务',weeks:[8,19],cmds:['crontab','flock','date'],lab:'lab-backup',tri:''},
+ 'kp-fw':{n:'防火墙与放行',weeks:[18,23],cmds:['firewall-cmd','iptables','ss','netstat'],lab:'lab-sec',tri:'site'},
+ 'kp-ticket':{n:'五步工单',weeks:[8,16,24],cmds:['journalctl','ss','curl'],lab:'lab-triage',tri:'method'}
 };
 function kpNorm(id){ return id==='kp-k8s'?'kp-container':id; }
 function kpOfWeek(n){
@@ -11636,6 +11921,7 @@ function injectKpWikiLinks(){
   });
 }
 function kpJumpWiki(id){
+  if(id==='kp-container') id='kp-k8s';
   showView('wiki');
   setTimeout(()=>{
     const el=document.getElementById(id);
@@ -12161,8 +12447,9 @@ function kpOfTri(id){
   const key=Object.keys(KP_REG).find(k=>KP_REG[k].tri===id);
   return key?kpChips(key):'';
 }
-const CAT2KP={net:'kp-net',route:'kp-net',diag:'kp-pcap',linux:'kp-file',sec:'kp-perm',cloud:'kp-k8s',term:'kp-shell',voip:'',fiber:'',db:'',case:''};
+const CAT2KP={net:'kp-net',route:'kp-net',diag:'kp-pcap',linux:'kp-file',sec:'kp-fw',cloud:'kp-k8s',term:'kp-shell',voip:'',fiber:'',db:'',case:''};
 function kpOfQ(q){
+  if(q.cat==='db') return `<div class="kp-rel"><b>相关内容</b><button class="kp-chip" data-openlesson="l33">数据库专题课 · 数据库与中间件</button></div>`;
   const k=q.kp||CAT2KP[q.cat];
   if(k) return kpChips(k);
   const tri=q.cat==='case'?'<button class="kp-chip" data-gotri="site">去排障台</button>':'';
@@ -13920,7 +14207,8 @@ function renderLesson(l){
   if(labObj){
     html+=sec('先动手：去实验台跑一遍',`<div class="lab-bridge"><div><b>${labBrd.title}</b><p>同一知识点，先在模拟终端完成故障注入、取证和验收；再回来做题。</p></div><button class="btn primary sm" id="lwLab">打开实验</button></div>`);
   }
-  html+=sec(`工单验收：闭卷 ${l.quiz?l.quiz.length:6} 题`, l.quiz&&l.quiz.length? lqHTML(l) : `<div class="practice-box"><p>本课暂无闭卷题库，不能计入课程完成；先做关联练习。</p><button class="btn primary sm" id="lwPractice">开始练习</button></div>`);
+  html+=sec(`工单验收：闭卷 ${l.quiz?l.quiz.length:6} 题`, l.quiz&&l.quiz.length? lqHTML(l) : `<div class="practice-box"><p>本课暂无闭卷题库，不能计入课程完成；先做关联练习。</p></div>`);
+  if(l.practice&&l.practice.length) html+=sec(`拓展练习 · ${l.practice.length} 题`, `<div class="practice-box"><p>同知识点、换场景：不再重复闭卷题干，用来检查能不能把本课内容用到现场。</p><button class="btn primary sm" id="lwPractice">开始拓展练习</button></div>`);
   const oi=LESSON_ORDER.indexOf(l.id), prev=oi>0?LESSONS_MAP[LESSON_ORDER[oi-1]]:null, next=oi>=0&&oi<LESSON_ORDER.length-1?LESSONS_MAP[LESSON_ORDER[oi+1]]:null;
   html+=sec('下一步：把这条线接上',`<div class="lw-next">${prev?`<button class="btn sm ghost" onclick="openLesson('${prev.id}')">← 上一课：${prev.title}</button>`:'<span></span>'}${next?`<button class="btn primary sm" onclick="openLesson('${next.id}')">下一课：${next.title} →</button>`:'<button class="btn sm ghost" onclick="renderCourse()">回到课程主线</button>'}</div>
     <div class="link-acts" style="margin-top:12px">
@@ -13942,7 +14230,7 @@ function bindLesson(l){
     ex.setAttribute('aria-expanded',collapsed?'false':'true');
   };
   const p=$('lwPractice');
-  if(p) p.onclick=()=>startQuiz('lesson',l.practice.slice());
+  if(p&&l.practice&&l.practice.length) p.onclick=()=>startQuiz('lesson',l.practice.slice());
   const LK=LESSON_LINKS[l.id]||{};
   const lb=$('lwLab');
   if(lb)lb.onclick=()=>{ if(LK.lab){ showView('lab'); LAB_CTX=LK.camp?('l'+String(LK.camp).padStart(2,'0')):null; LAB_FRESH=false; openLab(LK.lab); } };
